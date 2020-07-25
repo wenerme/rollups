@@ -30,11 +30,7 @@ jobs:
           path: .yarn
           key: ${{ runner.os }}-build-cache
 
-      - run: make ci
-      # - run: make gh-publish
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     GH_NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
+      - run: make gh-ci
 
       - name: Deploy Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
