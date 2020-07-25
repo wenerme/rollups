@@ -1336,6 +1336,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@rollups/lodash@workspace:packages/lodash":
+  version: 0.0.0-use.local
+  resolution: "@rollups/lodash@workspace:packages/lodash"
+  dependencies:
+    "@rollup/plugin-commonjs": ^14.0.0
+    "@rollup/plugin-node-resolve": ^8.4.0
+    "@types/lodash": ^4
+    lodash: ^4.17.19
+    rollup: ^2.23.0
+    rollup-plugin-terser: ^6.1.0
+  languageName: unknown
+  linkType: soft
+
 "@rollups/moment@workspace:packages/moment":
   version: 0.0.0-use.local
   resolution: "@rollups/moment@workspace:packages/moment"
