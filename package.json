@@ -12,6 +12,7 @@
     "@types/glob": "^7",
     "glob": "^7.1.6",
     "lerna": "^3.22.1",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "sort-package-json": "^1.44.0"
   }
 }

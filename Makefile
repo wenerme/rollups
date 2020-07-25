@@ -7,7 +7,7 @@ love:
 	@exit 1
 
 format:
-	yarn dlx sort-package-json package.json packages/*/package.json
+	yarn sort-package-json package.json packages/*/package.json
 	yarn prettier --write package.json packages/*/package.json packages/*/rollup.config.js
 
 ci:
@@ -72,6 +72,10 @@ else
 	PKG=$* ./scripts/pkg-public.sh
 endif
 
+init-%:
+	PKG=$* scripts/pkg-init.sh
+	$(MAKE) update-$*
+
 public: $(addprefix public-,$(PKGS)) README.md
 	mkdir -p public
 	cp README.md public
@@ -83,6 +87,10 @@ update-%:
 	cp scripts/update.js packages/$*
 	yarn workspace @rollups/$* node update.js
 	rm packages/$*/update.js
+
+	yarn sort-package-json packages/$*/package.json
+	yarn prettier --write packages/$*/package.json packages/$*/rollup.config.js
+
 
 update: $(addprefix update-,$(PKGS))
 	$(MAKE) format

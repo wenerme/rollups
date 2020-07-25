@@ -1,0 +1,57 @@
+{
+  "name": "@rollups/moment",
+  "version": "2.27.0",
+  "description": "Parse, validate, manipulate, and display dates",
+  "keywords": [
+    "moment",
+    "date",
+    "time",
+    "parse",
+    "format",
+    "validate",
+    "i18n",
+    "l10n",
+    "ender"
+  ],
+  "homepage": "https://momentjs.com",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/wenerme/rollups.git",
+    "directory": "packages/moment"
+  },
+  "license": "MIT",
+  "author": "Iskren Ivov Chernev <iskren.chernev@gmail.com> (https://github.com/ichernev)",
+  "exports": {
+    ".": {
+      "import": "./dist/moment.esm.min.js",
+      "require": "./dist/moment.cjs.min.js",
+      "system": "./dist/moment.system.min.js"
+    }
+  },
+  "main": "dist/moment.cjs.min.js",
+  "umd:main": "dist/moment.umd.min.js",
+  "unpkg": "dist/moment.umd.min.js",
+  "module": "dist/moment.esm.min.js",
+  "jsnext:main": "dist/moment.esm.min.js",
+  "browser": "dist/moment.umd.min.js",
+  "files": [
+    "package.json",
+    "rollup.config.js",
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn rollup -c rollup.config.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@types/lodash": "^4",
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "rollup": "^2.23.0",
+    "rollup-plugin-terser": "^6.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
