@@ -11,5 +11,9 @@ publish:
 	yarn lerna publish from-package
 
 gh-publish:
-	echo '//npm.pkg.github.com:_authToken=${GITHUB_TOKEN}'>.npmrc
+	# https://github.com/lerna/lerna/issues/361
+	# https://github.com/lerna/lerna/issues/1697
+	echo '//npm.pkg.github.com:_authToken=${GITHUB_TOKEN}' > .npmrc
+	echo '//npm.pkg.github.com:_authToken=${GITHUB_TOKEN}' > ~/.npmrc
+	cp .npmrc packages/*/
 	yarn lerna publish from-package --yes --registry "https://npm.pkg.github.com/wenerme"
