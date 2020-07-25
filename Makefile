@@ -18,3 +18,6 @@ gh-publish:
 	echo '//npm.pkg.github.com:_authToken=${GH_NPM_TOKEN}' > ~/.npmrc
 	cp .npmrc packages/*/
 	yarn lerna publish from-package --yes --@rollups:registry https://npm.pkg.github.com/wenerme
+
+build:
+	yarn workspaces foreach run prepublishOnly

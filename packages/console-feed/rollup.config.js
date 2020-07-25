@@ -14,7 +14,7 @@ const moduleInput = require.resolve(`${name}/${opkg['module'] || opkg['jsnext:ma
 const plugins = [nodeResolve({ browser: true }), commonjs()];
 const globalName = startCase(camelCase(name)).replace(/\W/g, '');
 const external = [...Object.keys(opkg.peerDependencies || {})];
-const globals = {};
+const globals = { react: 'React' };
 const conf = { external, plugins, inlineDynamicImports: true };
 
 console.info(`Rollup ${name}/${globalName}`);
