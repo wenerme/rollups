@@ -13,6 +13,11 @@
     "inversion of control container"
   ],
   "homepage": "http://inversify.io",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/wenerme/rollups.git",
+    "directory": "packages/inversify"
+  },
   "license": "MIT",
   "author": "Remo H. Jansen",
   "exports": {
