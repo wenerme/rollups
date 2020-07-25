@@ -16,7 +16,7 @@
   "homepage": "https://momentjs.com",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/wenerme/rollups.git",
+    "url": "https://github.com/wenerme/rollups.git",
     "directory": "packages/moment"
   },
   "license": "MIT",

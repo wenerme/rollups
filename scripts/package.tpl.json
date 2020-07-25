@@ -2,7 +2,7 @@
   "name": "@rollups/__PKG_NAME__",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/wenerme/rollups.git",
+    "url": "https://github.com/wenerme/rollups.git",
     "directory": "packages/__PKG_NAME__"
   },
   "exports": {

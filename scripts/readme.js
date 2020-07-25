@@ -29,7 +29,7 @@ async function buildPackages() {
 }
 function tpl(pkg) {
   const name = pkg.name.split('/')[1];
-  return `| [${name}](https://www.npmjs.com/package/${name}) | [![VERSION](https://img.shields.io/npm/v/${name})](https://www.npmjs.com/package/${name}) | ![LICENSE](https://img.shields.io/npm/l/${name}) | [@rollups/${name}](./pacckages/${name}) | [![VERSION](https://img.shields.io/npm/v/@rollups/${name})]((https://www.npmjs.com/package/@rollups/${name})) | [jsdelivr](https://cdn.jsdelivr.net/npm/@rollups/${name}) | [unpkg](https://unpkg.com/@rollups/${name}) |`;
+  return `| [${name}](https://www.npmjs.com/package/${name}) | [![VERSION](https://img.shields.io/npm/v/${name})](https://www.npmjs.com/package/${name}) | ![LICENSE](https://img.shields.io/npm/l/${name}) | [@rollups/${name}](./pacckages/${name}) | [![VERSION](https://img.shields.io/npm/v/@rollups/${name})](https://www.npmjs.com/package/@rollups/${name}) | [jsdelivr](https://cdn.jsdelivr.net/npm/@rollups/${name}) | [unpkg](https://unpkg.com/@rollups/${name}) |`;
 }
 
 async function main() {
