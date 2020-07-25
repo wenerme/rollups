@@ -5,6 +5,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  schedule:
+    - cron: '*/30 * * * *'
 
 jobs:
   build:
@@ -29,10 +31,20 @@ jobs:
           key: ${{ runner.os }}-build-cache
 
       - run: make ci
+      - run: make gh-publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Deploy Pages
-      #   uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Deploy Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: public
+
+      # - uses: stefanzweifel/git-auto-commit-action@v4
       #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     BRANCH: gh-pages
-      #     FOLDER: public
+      #     commit_message: Update versions
+      #     commit_user_name: GitHub Actions
+      #     commit_user_email: wenermail@gmail.com
+      #     commit_author: GitHub Actions <wenermail@gmail.com>
