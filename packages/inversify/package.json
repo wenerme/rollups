@@ -1,0 +1,44 @@
+{
+  "name": "@rollups/inversify",
+  "version": "5.0.1",
+  "description": "A powerful and lightweight inversion of control container for JavaScript and Node.js apps powered by TypeScript.",
+  "keywords": [
+    "ioc",
+    "di",
+    "javascript",
+    "typescript",
+    "node",
+    "dependency injection",
+    "dependency inversion",
+    "inversion of control container"
+  ],
+  "homepage": "http://inversify.io",
+  "license": "MIT",
+  "author": "Remo H. Jansen",
+  "exports": {
+    ".": {
+      "import": "./dist/inversify.esm.min.js",
+      "require": "./dist/inversify.cjs.min.js",
+      "system": "./dist/inversify.system.min.js"
+    }
+  },
+  "main": "dist/inversify.cjs.min.js",
+  "umd:main": "dist/inversify.umd.min.js",
+  "unpkg": "dist/inversify.umd.min.js",
+  "module": "dist/inversify.esm.min.js",
+  "jsnext:main": "dist/inversify.esm.min.js",
+  "browser": "dist/inversify.umd.min.js",
+  "files": [
+    "package.json",
+    "rollup.config.js",
+    "dist"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@rollups/roller": "workspace:packages/roller",
+    "inversify": "^5.0.1",
+    "rollup": "^2.23.0",
+    "rollup-plugin-terser": "^6.1.0"
+  }
+}
