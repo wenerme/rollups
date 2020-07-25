@@ -1,3 +1,5 @@
+SHELL=/bin/bash -O extglob -c
+
 PKGS:=$(shell ls packages/*/rollup.config.js | egrep -o '[^/]*/rollup' | egrep -o '^[^/]*' | paste -sd ' ' -)
 
 love:
@@ -28,7 +30,7 @@ gh-update: ci-prepare update
 	STAGED_ONLY=1 $(MAKE) public
 	git status
 
-gh-publish: npmrc ci-publish
+gh-publish: npmrc ci-publish clean-npmrc
 
 # # GPR require org name match owner name - useless
 # gh-publish:
@@ -45,7 +47,10 @@ ifeq (,${NPM_TOKEN})
 	@exit 1
 endif
 	echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-	cp .npmrc packages/*/
+	echo packages/*/ | xargs -n 1 cp -v .npmrc
+
+clean-npmrc:
+	rm -rf packages/*/.npmrc .npmrc
 
 ci-publish:
 	yarn lerna publish from-package --yes

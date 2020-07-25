@@ -28,9 +28,6 @@ jobs:
           key: ${{ runner.os }}-build-cache
 
       - run: make gh-update
-      - run: make gh-publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Deploy Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -45,3 +42,7 @@ jobs:
           commit_user_name: GitHub Actions
           commit_user_email: wenermail@gmail.com
           commit_author: GitHub Actions <wenermail@gmail.com>
+
+      - run: make gh-publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
