@@ -3,8 +3,8 @@ format:
 	yarn prettier --write package.json packages/*/package.json packages/*/rollup.config.js
 
 ci:
-	yarn install
-	$(MAKE) format
+	yarn install --immutable
+	# $(MAKE) format
 	mkdir -p public
 
 publish:
