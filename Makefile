@@ -72,9 +72,10 @@ else
 	PKG=$* ./scripts/pkg-public.sh
 endif
 
-public: $(addprefix public-,$(PKGS))
+public: $(addprefix public-,$(PKGS)) README.md
 	mkdir -p public
 	cp README.md public
+	git add README.md
 	@echo Done
 
 update-%:
@@ -89,3 +90,10 @@ update: $(addprefix update-,$(PKGS))
 
 status:
 	@echo Packages: $(PKGS)
+
+README.md: README.stub.md $(wildcard packages/*/package.json) always
+	yarn node ./scripts/readme.js
+
+always:
+
+.PHONY: always
