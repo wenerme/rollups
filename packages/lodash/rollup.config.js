@@ -12,9 +12,9 @@ const opkg = require(`${name}/package.json`);
 const input = require.resolve('lodash/index.js');
 const moduleInput = require.resolve('lodash/index.js');
 const plugins = [nodeResolve({ browser: true }), commonjs()];
-const globalName = startCase(camelCase(name)).replace(/\W/g, '');
+const globalName = '_';
 const external = [...Object.keys(opkg.peerDependencies || {})];
-const globals = {};
+const globals = { lodash: '_' };
 const conf = { external, plugins, inlineDynamicImports: true };
 
 console.info(`Rollup ${name}/${globalName}`);
@@ -86,15 +86,15 @@ export default [
   /// will use lodash.min - skip non min
   {
     ...conf,
-    input: require.resolve('lodash/fp'),
+    input: './fp.js',
     output: [
-      // {
-      //   file: `dist/${name}-fp.umd.js`,
-      //   sourcemap: true,
-      //   name: globalName,
-      //   globals,
-      //   format: 'umd',
-      // },
+      {
+        file: `dist/${name}-fp.umd.js`,
+        sourcemap: true,
+        name: globalName,
+        globals,
+        format: 'umd',
+      },
       {
         file: `dist/${name}-fp.umd.min.js`,
         sourcemap: true,
@@ -103,22 +103,22 @@ export default [
         format: 'umd',
         plugins: [terser()],
       },
-      // {
-      //   file: `dist/${name}-fp.esm.js`,
-      //   sourcemap: true,
-      //   format: 'esm',
-      // },
+      {
+        file: `dist/${name}-fp.esm.js`,
+        sourcemap: true,
+        format: 'esm',
+      },
       {
         file: `dist/${name}-fp.esm.min.js`,
         sourcemap: true,
         format: 'esm',
         plugins: [terser()],
       },
-      // {
-      //   file: `dist/${name}-fp.system.js`,
-      //   sourcemap: true,
-      //   format: 'system',
-      // },
+      {
+        file: `dist/${name}-fp.system.js`,
+        sourcemap: true,
+        format: 'system',
+      },
       {
         file: `dist/${name}-fp.system.min.js`,
         sourcemap: true,
@@ -129,14 +129,15 @@ export default [
   },
   {
     ...conf,
-    input: require.resolve('lodash/fp'),
+    input: './fp.js',
+    external: ['lodash'],
     output: [
-      // {
-      //   file: `dist/${name}-fp.cjs.js`,
-      //   sourcemap: true,
-      //   format: 'commonjs',
-      //   exports: 'auto',
-      // },
+      {
+        file: `dist/${name}-fp.cjs.js`,
+        sourcemap: true,
+        format: 'commonjs',
+        exports: 'auto',
+      },
       {
         file: `dist/${name}-fp.cjs.min.js`,
         sourcemap: true,
