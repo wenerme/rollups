@@ -1,0 +1,51 @@
+{
+  "name": "@rollups/lodash",
+  "version": "4.17.20",
+  "description": "Lodash modular utilities.",
+  "keywords": "modules, stdlib, util",
+  "homepage": "https://lodash.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wenerme/rollups.git",
+    "directory": "packages/lodash"
+  },
+  "license": "MIT",
+  "author": "John-David Dalton <john.david.dalton@gmail.com>",
+  "exports": {
+    ".": {
+      "import": "./dist/lodash.esm.min.js",
+      "require": "./dist/lodash.cjs.min.js",
+      "system": "./dist/lodash.system.min.js"
+    },
+    "./fp": {
+      "import": "./dist/lodash-fp.esm.min.js",
+      "require": "./dist/lodash-fp.cjs.min.js",
+      "system": "./dist/lodash-fp.system.min.js"
+    }
+  },
+  "main": "dist/lodash.cjs.min.js",
+  "umd:main": "dist/lodash.umd.min.js",
+  "unpkg": "dist/lodash.umd.min.js",
+  "module": "dist/lodash.esm.min.js",
+  "jsnext:main": "dist/lodash.esm.min.js",
+  "browser": "dist/lodash.umd.min.js",
+  "files": [
+    "package.json",
+    "rollup.config.js",
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn rollup -c rollup.config.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@types/lodash": "^4",
+    "lodash": "^4.17.20",
+    "rollup": "^2.23.0",
+    "rollup-plugin-terser": "^6.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
