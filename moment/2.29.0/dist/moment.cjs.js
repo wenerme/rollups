@@ -1,15 +1,25 @@
+'use strict';
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, basedir, module) {
+	return module = {
+	  path: basedir,
+	  exports: {},
+	  require: function (path, base) {
+      return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
+    }
+	}, fn(module, module.exports), module.exports;
+}
+
+function commonjsRequire () {
+	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
+}
+
+var moment = createCommonjsModule(function (module, exports) {
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Moment = factory());
-}(this, (function () { 'use strict';
-
-    //! moment.js
-    //! version : 2.28.0
-    //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
-    //! license : MIT
-    //! momentjs.com
-
+     module.exports = factory() ;
+}(commonjsGlobal, (function () {
     var hookCallback;
 
     function hooks() {
@@ -2082,13 +2092,13 @@
         // TODO: Find a better way to register and load all the locales in Node
         if (
             locales[name] === undefined &&
-            typeof module !== 'undefined' &&
+            'object' !== 'undefined' &&
             module &&
             module.exports
         ) {
             try {
                 oldLocale = globalLocale._abbr;
-                aliasedRequire = require;
+                aliasedRequire = commonjsRequire;
                 aliasedRequire('./locale/' + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {
@@ -3726,7 +3736,10 @@
     function calendar$1(time, formats) {
         // Support for single parameter, formats only overload to the calendar function
         if (arguments.length === 1) {
-            if (isMomentInput(arguments[0])) {
+            if (!arguments[0]) {
+                time = undefined;
+                formats = undefined;
+            } else if (isMomentInput(arguments[0])) {
                 time = arguments[0];
                 formats = undefined;
             } else if (isCalendarSpec(arguments[0])) {
@@ -5618,7 +5631,7 @@
 
     //! moment.js
 
-    hooks.version = '2.28.0';
+    hooks.version = '2.29.0';
 
     setHookCallback(createLocal);
 
@@ -5666,4 +5679,7 @@
     return hooks;
 
 })));
-//# sourceMappingURL=moment.umd.js.map
+});
+
+module.exports = moment;
+//# sourceMappingURL=moment.cjs.js.map
