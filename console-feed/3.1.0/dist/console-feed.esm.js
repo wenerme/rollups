@@ -1,9 +1,4 @@
-'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = require('react');
-var React__default = _interopDefault(React);
+import React, { createContext, forwardRef, createElement, memo, Children, useContext, useCallback, useState, useLayoutEffect, useMemo } from 'react';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1473,25 +1468,25 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
   };
 };
 
-var EmotionCacheContext = React.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
+var EmotionCacheContext = createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
 // because this module is primarily intended for the browser and node
 // but it's also required in react native and similar environments sometimes
 // and we could have a special build just for that
 // but this is much easier and the native packages
 // might use a different theme context in the future anyway
 typeof HTMLElement !== 'undefined' ? createCache() : null);
-var ThemeContext = React.createContext({});
+var ThemeContext = createContext({});
 var CacheProvider = EmotionCacheContext.Provider;
 
 var withEmotionCache = function withEmotionCache(func) {
   var render = function render(props, ref) {
-    return React.createElement(EmotionCacheContext.Consumer, null, function (cache) {
+    return createElement(EmotionCacheContext.Consumer, null, function (cache) {
       return func(props, cache, ref);
     });
   }; // $FlowFixMe
 
 
-  return React.forwardRef(render);
+  return forwardRef(render);
 };
 
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
@@ -1539,7 +1534,7 @@ var render = function render(cache, props, theme, ref) {
 
   newProps.ref = ref;
   newProps.className = className;
-  var ele = React.createElement(type, newProps);
+  var ele = createElement(type, newProps);
 
   return ele;
 };
@@ -1549,7 +1544,7 @@ var Emotion =
 withEmotionCache(function (props, cache, ref) {
   // use Context.read for the theme when it's stable
   if (typeof props.css === 'function') {
-    return React.createElement(ThemeContext.Consumer, null, function (theme) {
+    return createElement(ThemeContext.Consumer, null, function (theme) {
       return render(cache, props, theme, ref);
     });
   }
@@ -1620,7 +1615,7 @@ function merge(registered, css, className) {
 }
 
 var ClassNames = withEmotionCache(function (props, context) {
-  return React.createElement(ThemeContext.Consumer, null, function (theme) {
+  return createElement(ThemeContext.Consumer, null, function (theme) {
     var hasRendered = false;
 
     var css = function css() {
@@ -2044,12 +2039,12 @@ var createCacheWithTheme = weakMemoize(function (outerTheme) {
 });
 
 var ThemeProvider = function ThemeProvider(props) {
-  return React.createElement(ThemeContext.Consumer, null, function (theme) {
+  return createElement(ThemeContext.Consumer, null, function (theme) {
     if (props.theme !== theme) {
       theme = createCacheWithTheme(theme)(props.theme);
     }
 
-    return React.createElement(ThemeContext.Provider, {
+    return createElement(ThemeContext.Provider, {
       value: theme
     }, props.children);
   });
@@ -2060,8 +2055,8 @@ function withTheme(Component) {
   var componentName = Component.displayName || Component.name || 'Component';
 
   var render = function render(props, ref) {
-    return React.createElement(ThemeContext.Consumer, null, function (theme) {
-      return React.createElement(Component, _extends_1({
+    return createElement(ThemeContext.Consumer, null, function (theme) {
+      return createElement(Component, _extends_1({
         theme: theme,
         ref: ref
       }, props));
@@ -2069,13 +2064,13 @@ function withTheme(Component) {
   }; // $FlowFixMe
 
 
-  var WithTheme = React.forwardRef(render);
+  var WithTheme = forwardRef(render);
   WithTheme.displayName = "WithTheme(" + componentName + ")";
   return hoistNonReactStatics_cjs(WithTheme, Component);
 }
 
 function useTheme() {
-  return React__default.useContext(ThemeContext);
+  return React.useContext(ThemeContext);
 }
 
 var emotionTheming_browser_esm = /*#__PURE__*/Object.freeze({
@@ -3204,7 +3199,7 @@ chromeDark: theme,
 chromeLight: theme$1
 });
 
-var ExpandedPathsContext = React.createContext([{}, function () {}]);
+var ExpandedPathsContext = createContext([{}, function () {}]);
 
 var unselectable = {
   WebkitTouchCallout: 'none',
@@ -3481,14 +3476,14 @@ var base = (function (theme) {
 });
 
 var DEFAULT_THEME_NAME = 'chromeLight';
-var ThemeContext$1 = React.createContext(base(themes[DEFAULT_THEME_NAME]));
+var ThemeContext$1 = createContext(base(themes[DEFAULT_THEME_NAME]));
 /**
  * Hook to get the component styles for the current theme.
  * @param {string} baseStylesKey - Name of the component to be styled
  */
 
 var useStyles = function useStyles(baseStylesKey) {
-  var themeStyles = React.useContext(ThemeContext$1);
+  var themeStyles = useContext(ThemeContext$1);
   return themeStyles[baseStylesKey];
 };
 /**
@@ -3504,7 +3499,7 @@ var themeAcceptor = function themeAcceptor(WrappedComponent) {
         theme = _ref$theme === void 0 ? DEFAULT_THEME_NAME : _ref$theme,
         restProps = _objectWithoutProperties(_ref, ["theme"]);
 
-    var themeStyles = React.useMemo(function () {
+    var themeStyles = useMemo(function () {
       switch (Object.prototype.toString.call(theme)) {
         case '[object String]':
           return base(themes[theme]);
@@ -3516,9 +3511,9 @@ var themeAcceptor = function themeAcceptor(WrappedComponent) {
           return base(themes[DEFAULT_THEME_NAME]);
       }
     }, [theme]);
-    return React__default.createElement(ThemeContext$1.Provider, {
+    return React.createElement(ThemeContext$1.Provider, {
       value: themeStyles
-    }, React__default.createElement(WrappedComponent, restProps));
+    }, React.createElement(WrappedComponent, restProps));
   };
 
   ThemeAcceptor.propTypes = {
@@ -3530,17 +3525,17 @@ var themeAcceptor = function themeAcceptor(WrappedComponent) {
 var Arrow = function Arrow(_ref) {
   var expanded = _ref.expanded,
       styles = _ref.styles;
-  return React__default.createElement("span", {
+  return React.createElement("span", {
     style: _objectSpread$1({}, styles.base, expanded ? styles.expanded : styles.collapsed)
   }, "\u25B6");
 };
 
-var TreeNode = React.memo(function (props) {
+var TreeNode = memo(function (props) {
   props = _objectSpread$1({
     expanded: true,
     nodeRenderer: function nodeRenderer(_ref2) {
       var name = _ref2.name;
-      return React__default.createElement("span", null, name);
+      return React.createElement("span", null, name);
     },
     onClick: function onClick() {},
     shouldShowArrow: false,
@@ -3556,20 +3551,20 @@ var TreeNode = React.memo(function (props) {
       shouldShowPlaceholder = _props.shouldShowPlaceholder;
   var styles = useStyles('TreeNode');
   var NodeRenderer = nodeRenderer;
-  return React__default.createElement("li", {
+  return React.createElement("li", {
     "aria-expanded": expanded,
     role: "treeitem",
     style: styles.treeNodeBase,
     title: title
-  }, React__default.createElement("div", {
+  }, React.createElement("div", {
     style: styles.treeNodePreviewContainer,
     onClick: onClick
-  }, shouldShowArrow || React.Children.count(children) > 0 ? React__default.createElement(Arrow, {
+  }, shouldShowArrow || Children.count(children) > 0 ? React.createElement(Arrow, {
     expanded: expanded,
     styles: styles.treeNodeArrow
-  }) : shouldShowPlaceholder && React__default.createElement("span", {
+  }) : shouldShowPlaceholder && React.createElement("span", {
     style: styles.treeNodePlaceholder
-  }, "\xA0"), React__default.createElement(NodeRenderer, props)), React__default.createElement("ol", {
+  }, "\xA0"), React.createElement(NodeRenderer, props)), React.createElement("ol", {
     role: "group",
     style: styles.treeNodeChildNodesContainer
   }, expanded ? children : undefined));
@@ -3670,26 +3665,26 @@ var getExpandedPaths = function getExpandedPaths(data, dataIterator, expandPaths
   }, _objectSpread$1({}, prevExpandedPaths));
 };
 
-var ConnectedTreeNode = React.memo(function (props) {
+var ConnectedTreeNode = memo(function (props) {
   var data = props.data,
       dataIterator = props.dataIterator,
       path = props.path,
       depth = props.depth,
       nodeRenderer = props.nodeRenderer;
 
-  var _useContext = React.useContext(ExpandedPathsContext),
+  var _useContext = useContext(ExpandedPathsContext),
       _useContext2 = _slicedToArray(_useContext, 2),
       expandedPaths = _useContext2[0],
       setExpandedPaths = _useContext2[1];
 
   var nodeHasChildNodes = hasChildNodes(data, dataIterator);
   var expanded = !!expandedPaths[path];
-  var handleClick = React.useCallback(function () {
+  var handleClick = useCallback(function () {
     return nodeHasChildNodes && setExpandedPaths(function (prevExpandedPaths) {
       return _objectSpread$1({}, prevExpandedPaths, _defineProperty$1({}, path, !expanded));
     });
   }, [nodeHasChildNodes, setExpandedPaths, path, expanded]);
-  return React__default.createElement(TreeNode, _extends({
+  return React.createElement(TreeNode, _extends({
     expanded: expanded,
     onClick: handleClick // show arrow anyway even if not expanded and not rendering children
     ,
@@ -3704,7 +3699,7 @@ var ConnectedTreeNode = React.memo(function (props) {
         data = _ref.data,
         renderNodeProps = _objectWithoutProperties(_ref, ["name", "data"]);
 
-    return React__default.createElement(ConnectedTreeNode, _extends({
+    return React.createElement(ConnectedTreeNode, _extends({
       name: name,
       data: data,
       depth: depth + 1,
@@ -3723,7 +3718,7 @@ ConnectedTreeNode.propTypes = {
   expanded: propTypes.bool,
   nodeRenderer: propTypes.func
 };
-var TreeView = React.memo(function (_ref2) {
+var TreeView = memo(function (_ref2) {
   var name = _ref2.name,
       data = _ref2.data,
       dataIterator = _ref2.dataIterator,
@@ -3731,22 +3726,22 @@ var TreeView = React.memo(function (_ref2) {
       expandPaths = _ref2.expandPaths,
       expandLevel = _ref2.expandLevel;
   var styles = useStyles('TreeView');
-  var stateAndSetter = React.useState({});
+  var stateAndSetter = useState({});
 
   var _stateAndSetter = _slicedToArray(stateAndSetter, 2),
       setExpandedPaths = _stateAndSetter[1];
 
-  React.useLayoutEffect(function () {
+  useLayoutEffect(function () {
     return setExpandedPaths(function (prevExpandedPaths) {
       return getExpandedPaths(data, dataIterator, expandPaths, expandLevel, prevExpandedPaths);
     });
   }, [data, dataIterator, expandPaths, expandLevel]);
-  return React__default.createElement(ExpandedPathsContext.Provider, {
+  return React.createElement(ExpandedPathsContext.Provider, {
     value: stateAndSetter
-  }, React__default.createElement("ol", {
+  }, React.createElement("ol", {
     role: "tree",
     style: styles.treeViewOutline
-  }, React__default.createElement(ConnectedTreeNode, {
+  }, React.createElement(ConnectedTreeNode, {
     name: name,
     data: data,
     dataIterator: dataIterator,
@@ -3784,7 +3779,7 @@ var ObjectName = function ObjectName(_ref) {
 
   var appliedStyles = _objectSpread$1({}, themeStyles.base, dimmed ? themeStyles['dimmed'] : {}, styles);
 
-  return React__default.createElement("span", {
+  return React.createElement("span", {
     style: appliedStyles
   }, name);
 };
@@ -3814,70 +3809,70 @@ var ObjectValue = function ObjectValue(_ref) {
 
   switch (_typeof(object)) {
     case 'number':
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: mkStyle('objectValueNumber')
       }, String(object));
 
     case 'string':
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: mkStyle('objectValueString')
       }, "\"", object, "\"");
 
     case 'boolean':
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: mkStyle('objectValueBoolean')
       }, String(object));
 
     case 'undefined':
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: mkStyle('objectValueUndefined')
       }, "undefined");
 
     case 'object':
       if (object === null) {
-        return React__default.createElement("span", {
+        return React.createElement("span", {
           style: mkStyle('objectValueNull')
         }, "null");
       }
 
       if (object instanceof Date) {
-        return React__default.createElement("span", null, object.toString());
+        return React.createElement("span", null, object.toString());
       }
 
       if (object instanceof RegExp) {
-        return React__default.createElement("span", {
+        return React.createElement("span", {
           style: mkStyle('objectValueRegExp')
         }, object.toString());
       }
 
       if (Array.isArray(object)) {
-        return React__default.createElement("span", null, "Array(".concat(object.length, ")"));
+        return React.createElement("span", null, "Array(".concat(object.length, ")"));
       }
 
       if (!object.constructor) {
-        return React__default.createElement("span", null, "Object");
+        return React.createElement("span", null, "Object");
       }
 
       if (typeof object.constructor.isBuffer === 'function' && object.constructor.isBuffer(object)) {
-        return React__default.createElement("span", null, "Buffer[".concat(object.length, "]"));
+        return React.createElement("span", null, "Buffer[".concat(object.length, "]"));
       }
 
-      return React__default.createElement("span", null, object.constructor.name);
+      return React.createElement("span", null, object.constructor.name);
 
     case 'function':
-      return React__default.createElement("span", null, React__default.createElement("span", {
+      return React.createElement("span", null, React.createElement("span", {
         style: mkStyle('objectValueFunctionPrefix')
-      }, "\u0192\xA0"), React__default.createElement("span", {
+      }, "\u0192\xA0"), React.createElement("span", {
         style: mkStyle('objectValueFunctionName')
       }, object.name, "()"));
 
     case 'symbol':
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: mkStyle('objectValueSymbol')
       }, object.toString());
 
     default:
-      return React__default.createElement("span", null);
+      return React.createElement("span", null);
   }
 };
 
@@ -3911,7 +3906,7 @@ var ObjectPreview = function ObjectPreview(_ref) {
   var object = data;
 
   if (_typeof(object) !== 'object' || object === null || object instanceof Date || object instanceof RegExp) {
-    return React__default.createElement(ObjectValue, {
+    return React.createElement(ObjectValue, {
       object: object
     });
   }
@@ -3919,22 +3914,22 @@ var ObjectPreview = function ObjectPreview(_ref) {
   if (Array.isArray(object)) {
     var maxProperties = styles.arrayMaxProperties;
     var previewArray = object.slice(0, maxProperties).map(function (element, index) {
-      return React__default.createElement(ObjectValue, {
+      return React.createElement(ObjectValue, {
         key: index,
         object: element
       });
     });
 
     if (object.length > maxProperties) {
-      previewArray.push(React__default.createElement("span", {
+      previewArray.push(React.createElement("span", {
         key: "ellipsis"
       }, "\u2026"));
     }
 
     var arrayLength = object.length;
-    return React__default.createElement(React__default.Fragment, null, React__default.createElement("span", {
+    return React.createElement(React.Fragment, null, React.createElement("span", {
       style: styles.objectDescription
-    }, arrayLength === 0 ? "" : "(".concat(arrayLength, ")\xA0")), React__default.createElement("span", {
+    }, arrayLength === 0 ? "" : "(".concat(arrayLength, ")\xA0")), React.createElement("span", {
       style: styles.preview
     }, "[", intersperse(previewArray, ', '), "]"));
   } else {
@@ -3948,16 +3943,16 @@ var ObjectPreview = function ObjectPreview(_ref) {
         var ellipsis = void 0;
 
         if (propertyNodes.length === _maxProperties - 1 && Object.keys(object).length > _maxProperties) {
-          ellipsis = React__default.createElement("span", {
+          ellipsis = React.createElement("span", {
             key: 'ellipsis'
           }, "\u2026");
         }
 
-        propertyNodes.push(React__default.createElement("span", {
+        propertyNodes.push(React.createElement("span", {
           key: propertyName
-        }, React__default.createElement(ObjectName, {
+        }, React.createElement(ObjectName, {
           name: propertyName || "\"\""
-        }), ":\xA0", React__default.createElement(ObjectValue, {
+        }), ":\xA0", React.createElement(ObjectValue, {
           object: propertyValue
         }), ellipsis));
         if (ellipsis) break;
@@ -3965,9 +3960,9 @@ var ObjectPreview = function ObjectPreview(_ref) {
     }
 
     var objectConstructorName = object.constructor ? object.constructor.name : 'Object';
-    return React__default.createElement(React__default.Fragment, null, React__default.createElement("span", {
+    return React.createElement(React.Fragment, null, React.createElement("span", {
       style: styles.objectDescription
-    }, objectConstructorName === 'Object' ? '' : "".concat(objectConstructorName, " ")), React__default.createElement("span", {
+    }, objectConstructorName === 'Object' ? '' : "".concat(objectConstructorName, " ")), React.createElement("span", {
       style: styles.preview
     }, '{', intersperse(propertyNodes, ', '), '}'));
   }
@@ -3978,13 +3973,13 @@ var ObjectRootLabel = function ObjectRootLabel(_ref) {
       data = _ref.data;
 
   if (typeof name === 'string') {
-    return React__default.createElement("span", null, React__default.createElement(ObjectName, {
+    return React.createElement("span", null, React.createElement(ObjectName, {
       name: name
-    }), React__default.createElement("span", null, ": "), React__default.createElement(ObjectPreview, {
+    }), React.createElement("span", null, ": "), React.createElement(ObjectPreview, {
       data: data
     }));
   } else {
-    return React__default.createElement(ObjectPreview, {
+    return React.createElement(ObjectPreview, {
       data: data
     });
   }
@@ -4000,10 +3995,10 @@ var ObjectLabel = function ObjectLabel(_ref) {
       _ref$isNonenumerable = _ref.isNonenumerable,
       isNonenumerable = _ref$isNonenumerable === void 0 ? false : _ref$isNonenumerable;
   var object = data;
-  return React__default.createElement("span", null, React__default.createElement(ObjectName, {
+  return React.createElement("span", null, React.createElement(ObjectName, {
     name: name,
     dimmed: isNonenumerable
-  }), React__default.createElement("span", null, ": "), React__default.createElement(ObjectValue, {
+  }), React.createElement("span", null, ": "), React.createElement(ObjectValue, {
     object: object
   }));
 };
@@ -4261,10 +4256,10 @@ var defaultNodeRenderer = function defaultNodeRenderer(_ref) {
       name = _ref.name,
       data = _ref.data,
       isNonenumerable = _ref.isNonenumerable;
-  return depth === 0 ? React__default.createElement(ObjectRootLabel, {
+  return depth === 0 ? React.createElement(ObjectRootLabel, {
     name: name,
     data: data
-  }) : React__default.createElement(ObjectLabel, {
+  }) : React.createElement(ObjectLabel, {
     name: name,
     data: data,
     isNonenumerable: isNonenumerable
@@ -4284,7 +4279,7 @@ var ObjectInspector = function ObjectInspector(_ref2) {
 
   var dataIterator = createIterator(showNonenumerable, sortObjectKeys);
   var renderer = nodeRenderer ? nodeRenderer : defaultNodeRenderer;
-  return React__default.createElement(TreeView, _extends({
+  return React.createElement(TreeView, _extends({
     nodeRenderer: renderer,
     dataIterator: dataIterator
   }, treeViewProps));
@@ -4404,15 +4399,15 @@ var DataContainer = function DataContainer(_ref) {
       rowsData = _ref.rowsData;
   var styles = useStyles('TableInspectorDataContainer');
   var borderStyles = useStyles('TableInspectorLeftBorder');
-  return React__default.createElement("div", {
+  return React.createElement("div", {
     style: styles.div
-  }, React__default.createElement("table", {
+  }, React.createElement("table", {
     style: styles.table
-  }, React__default.createElement("colgroup", null), React__default.createElement("tbody", null, rows.map(function (row, i) {
-    return React__default.createElement("tr", {
+  }, React.createElement("colgroup", null), React.createElement("tbody", null, rows.map(function (row, i) {
+    return React.createElement("tr", {
       key: row,
       style: styles.tr
-    }, React__default.createElement("td", {
+    }, React.createElement("td", {
       style: _objectSpread$1({}, styles.td, borderStyles.none)
     }, row), columns.map(function (column) {
       var rowData = rowsData[i]; // rowData could be
@@ -4427,14 +4422,14 @@ var DataContainer = function DataContainer(_ref) {
       //  undefined -> pass
 
       if (_typeof(rowData) === 'object' && rowData !== null && hasOwnProperty$2.call(rowData, column)) {
-        return React__default.createElement("td", {
+        return React.createElement("td", {
           key: column,
           style: _objectSpread$1({}, styles.td, borderStyles.solid)
-        }, React__default.createElement(ObjectValue, {
+        }, React.createElement(ObjectValue, {
           object: rowData[column]
         }));
       } else {
-        return React__default.createElement("td", {
+        return React.createElement("td", {
           key: column,
           style: _objectSpread$1({}, styles.td, borderStyles.solid)
         });
@@ -4444,7 +4439,7 @@ var DataContainer = function DataContainer(_ref) {
 };
 
 var SortIconContainer = function SortIconContainer(props) {
-  return React__default.createElement("div", {
+  return React.createElement("div", {
     style: {
       position: 'absolute',
       top: 1,
@@ -4460,7 +4455,7 @@ var SortIcon = function SortIcon(_ref) {
   var sortAscending = _ref.sortAscending;
   var styles = useStyles('TableInspectorSortIcon');
   var glyph = sortAscending ? '▲' : '▼';
-  return React__default.createElement("div", {
+  return React.createElement("div", {
     style: styles
   }, glyph);
 };
@@ -4479,25 +4474,25 @@ var TH = function TH(_ref2) {
 
   var styles = useStyles('TableInspectorTH');
 
-  var _useState = React.useState(false),
+  var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       hovered = _useState2[0],
       setHovered = _useState2[1];
 
-  var handleMouseEnter = React.useCallback(function () {
+  var handleMouseEnter = useCallback(function () {
     return setHovered(true);
   }, []);
-  var handleMouseLeave = React.useCallback(function () {
+  var handleMouseLeave = useCallback(function () {
     return setHovered(false);
   }, []);
-  return React__default.createElement("th", _extends({}, thProps, {
+  return React.createElement("th", _extends({}, thProps, {
     style: _objectSpread$1({}, styles.base, borderStyle, hovered ? styles.base[':hover'] : {}),
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     onClick: onClick
-  }), React__default.createElement("div", {
+  }), React.createElement("div", {
     style: styles.div
-  }, children), sorted && React__default.createElement(SortIconContainer, null, React__default.createElement(SortIcon, {
+  }, children), sorted && React.createElement(SortIconContainer, null, React.createElement(SortIcon, {
     sortAscending: sortAscending
   })));
 };
@@ -4515,17 +4510,17 @@ var HeaderContainer = function HeaderContainer(_ref) {
       onIndexTHClick = _ref.onIndexTHClick;
   var styles = useStyles('TableInspectorHeaderContainer');
   var borderStyles = useStyles('TableInspectorLeftBorder');
-  return React__default.createElement("div", {
+  return React.createElement("div", {
     style: styles.base
-  }, React__default.createElement("table", {
+  }, React.createElement("table", {
     style: styles.table
-  }, React__default.createElement("tbody", null, React__default.createElement("tr", null, React__default.createElement(TH, {
+  }, React.createElement("tbody", null, React.createElement("tr", null, React.createElement(TH, {
     borderStyle: borderStyles.none,
     sorted: sorted && sortIndexColumn,
     sortAscending: sortAscending,
     onClick: onIndexTHClick
   }, indexColumnText), columns.map(function (column) {
-    return React__default.createElement(TH, {
+    return React.createElement(TH, {
       borderStyle: borderStyles.solid,
       key: column,
       sorted: sorted && sortColumn === column,
@@ -4540,7 +4535,7 @@ var TableInspector = function TableInspector(_ref) {
       columns = _ref.columns;
   var styles = useStyles('TableInspector');
 
-  var _useState = React.useState({
+  var _useState = useState({
     // has user ever clicked the <th> tag to sort?
     sorted: false,
     // is index column sorted?
@@ -4558,7 +4553,7 @@ var TableInspector = function TableInspector(_ref) {
       sortAscending = _useState2$.sortAscending,
       setState = _useState2[1];
 
-  var handleIndexTHClick = React.useCallback(function () {
+  var handleIndexTHClick = useCallback(function () {
     setState(function (_ref2) {
       var sortIndexColumn = _ref2.sortIndexColumn,
           sortAscending = _ref2.sortAscending;
@@ -4571,7 +4566,7 @@ var TableInspector = function TableInspector(_ref) {
       };
     });
   }, []);
-  var handleTHClick = React.useCallback(function (col) {
+  var handleTHClick = useCallback(function (col) {
     setState(function (_ref3) {
       var sortColumn = _ref3.sortColumn,
           sortAscending = _ref3.sortAscending;
@@ -4587,7 +4582,7 @@ var TableInspector = function TableInspector(_ref) {
   }, []);
 
   if (_typeof(data) !== 'object' || data === null) {
-    return React__default.createElement("div", null);
+    return React.createElement("div", null);
   }
 
   var _getHeaders = getHeaders(data),
@@ -4690,9 +4685,9 @@ var TableInspector = function TableInspector(_ref) {
     });
   }
 
-  return React__default.createElement("div", {
+  return React.createElement("div", {
     style: styles.base
-  }, React__default.createElement(HeaderContainer, {
+  }, React.createElement(HeaderContainer, {
     columns: colHeaders
     /* for sorting */
     ,
@@ -4702,7 +4697,7 @@ var TableInspector = function TableInspector(_ref) {
     sortAscending: sortAscending,
     onTHClick: handleTHClick,
     onIndexTHClick: handleIndexTHClick
-  }), React__default.createElement(DataContainer, {
+  }), React.createElement(DataContainer, {
     rows: rowHeaders,
     columns: colHeaders,
     rowsData: rowsData
@@ -4732,9 +4727,9 @@ var OpenTag = function OpenTag(_ref) {
   var tagName = _ref.tagName,
       attributes = _ref.attributes,
       styles = _ref.styles;
-  return React__default.createElement("span", {
+  return React.createElement("span", {
     style: styles.base
-  }, '<', React__default.createElement("span", {
+  }, '<', React.createElement("span", {
     style: styles.tagName
   }, tagName), function () {
     if (attributes) {
@@ -4742,11 +4737,11 @@ var OpenTag = function OpenTag(_ref) {
 
       for (var i = 0; i < attributes.length; i++) {
         var attribute = attributes[i];
-        attributeNodes.push(React__default.createElement("span", {
+        attributeNodes.push(React.createElement("span", {
           key: i
-        }, ' ', React__default.createElement("span", {
+        }, ' ', React.createElement("span", {
           style: styles.htmlAttributeName
-        }, attribute.name), '="', React__default.createElement("span", {
+        }, attribute.name), '="', React.createElement("span", {
           style: styles.htmlAttributeValue
         }, attribute.value), '"'));
       }
@@ -4762,9 +4757,9 @@ var CloseTag = function CloseTag(_ref2) {
       _ref2$isChildNode = _ref2.isChildNode,
       isChildNode = _ref2$isChildNode === void 0 ? false : _ref2$isChildNode,
       styles = _ref2.styles;
-  return React__default.createElement("span", {
+  return React.createElement("span", {
     style: _extends({}, styles.base, isChildNode && styles.offsetLeft)
-  }, '</', React__default.createElement("span", {
+  }, '</', React.createElement("span", {
     style: styles.tagName
   }, tagName), '>');
 };
@@ -4787,7 +4782,7 @@ var DOMNodePreview = function DOMNodePreview(_ref3) {
   var styles = useStyles('DOMNodePreview');
 
   if (isCloseTag) {
-    return React__default.createElement(CloseTag, {
+    return React.createElement(CloseTag, {
       styles: styles.htmlCloseTag,
       isChildNode: true,
       tagName: data.tagName
@@ -4796,42 +4791,42 @@ var DOMNodePreview = function DOMNodePreview(_ref3) {
 
   switch (data.nodeType) {
     case Node.ELEMENT_NODE:
-      return React__default.createElement("span", null, React__default.createElement(OpenTag, {
+      return React.createElement("span", null, React.createElement(OpenTag, {
         tagName: data.tagName,
         attributes: data.attributes,
         styles: styles.htmlOpenTag
-      }), shouldInline(data) ? data.textContent : !expanded && '…', !expanded && React__default.createElement(CloseTag, {
+      }), shouldInline(data) ? data.textContent : !expanded && '…', !expanded && React.createElement(CloseTag, {
         tagName: data.tagName,
         styles: styles.htmlCloseTag
       }));
 
     case Node.TEXT_NODE:
-      return React__default.createElement("span", null, data.textContent);
+      return React.createElement("span", null, data.textContent);
 
     case Node.CDATA_SECTION_NODE:
-      return React__default.createElement("span", null, '<![CDATA[' + data.textContent + ']]>');
+      return React.createElement("span", null, '<![CDATA[' + data.textContent + ']]>');
 
     case Node.COMMENT_NODE:
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: styles.htmlComment
       }, '<!--', data.textContent, '-->');
 
     case Node.PROCESSING_INSTRUCTION_NODE:
-      return React__default.createElement("span", null, data.nodeName);
+      return React.createElement("span", null, data.nodeName);
 
     case Node.DOCUMENT_TYPE_NODE:
-      return React__default.createElement("span", {
+      return React.createElement("span", {
         style: styles.htmlDoctype
       }, '<!DOCTYPE ', data.name, data.publicId ? " PUBLIC \"".concat(data.publicId, "\"") : '', !data.publicId && data.systemId ? ' SYSTEM' : '', data.systemId ? " \"".concat(data.systemId, "\"") : '', '>');
 
     case Node.DOCUMENT_NODE:
-      return React__default.createElement("span", null, data.nodeName);
+      return React.createElement("span", null, data.nodeName);
 
     case Node.DOCUMENT_FRAGMENT_NODE:
-      return React__default.createElement("span", null, data.nodeName);
+      return React.createElement("span", null, data.nodeName);
 
     default:
-      return React__default.createElement("span", null, nameByNodeType[data.nodeType]);
+      return React.createElement("span", null, nameByNodeType[data.nodeType]);
   }
 };
 
@@ -4925,7 +4920,7 @@ regeneratorRuntime.mark(function domIterator(data) {
 });
 
 var DOMInspector = function DOMInspector(props) {
-  return React__default.createElement(TreeView, _extends({
+  return React.createElement(TreeView, _extends({
     nodeRenderer: DOMNodePreview,
     dataIterator: domIterator
   }, props));
@@ -4944,15 +4939,15 @@ var Inspector = function Inspector(_ref) {
       rest = _objectWithoutProperties(_ref, ["table", "data"]);
 
   if (table) {
-    return React__default.createElement(TableInspector$1, _extends({
+    return React.createElement(TableInspector$1, _extends({
       data: data
     }, rest));
   }
 
-  if (isDom(data)) return React__default.createElement(DOMInspector$1, _extends({
+  if (isDom(data)) return React.createElement(DOMInspector$1, _extends({
     data: data
   }, rest));
-  return React__default.createElement(ObjectInspector$1, _extends({
+  return React.createElement(ObjectInspector$1, _extends({
     data: data
   }, rest));
 };
@@ -4986,11 +4981,11 @@ var styles = function (props) {
         /**
          * Default log styles
          */
-        LOG_COLOR: 'rgba(255,255,255,0.9)', LOG_BACKGROUND: 'transparent', LOG_BORDER: 'rgba(255,255,255,0.03)', LOG_ICON_WIDTH: 10, LOG_ICON_HEIGHT: 18, LOG_ICON: 'none', 
+        LOG_COLOR: 'rgba(255,255,255,0.9)', LOG_BACKGROUND: 'transparent', LOG_BORDER: 'rgba(255,255,255,0.03)', LOG_ICON_WIDTH: 10, LOG_ICON_HEIGHT: 18, LOG_ICON: 'none', LOG_AMOUNT_BACKGROUND: '#42597f', LOG_AMOUNT_COLOR: '#8d8f91', 
         /**
          * Log types
          */
-        LOG_WARN_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVChTbY7BCoJQFERn0Q/3BX1JuxQjsSCXiV8gtCgxhCIrKIRIqKDVzXl5w5cNHBjm6eGinXiAXu5inY2xYm/mbpIh+vcFhLA3sx0athNUhymEsP+10lAEEA17x8o/9wFuNGnYuVlWve0SQl7P0sBu3aq2R1Q/1JzSkYGd29eqNv2wjdnUuvNRciC/N+qe+7gidbA8zyHkOINsvA/sumcOkjcabcBmw2+mMgAAAABJRU5ErkJggg==)", LOG_WARN_BACKGROUND: '#332b00', LOG_WARN_COLOR: '#ffdc9e', LOG_WARN_BORDER: '#650', LOG_ERROR_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADESURBVChTY4CB7ZI8tmfU5E6e01b+DMIgNkgMKg0BR9Vkux6YWPx/bemIgkFiIDmwogOaqrYPzazAEm8DwuGKYGyQHEgNw0VT05Mwib9v3v7/kJEHxiA2TDFIDcNNU4vPMFPACj58/P/v40cwGyYOUsNwy8IZRSFIEUgxskKQGoZrzp4ErQapYbgYHG371M4dLACTQGaD5EBqwD6/FpzQ9dTBE64IhkFiIDmwIhi4mlJqey8o4eR9r8jPIAxig8QgsgwMAFZz1YtGPXgjAAAAAElFTkSuQmCC)", LOG_ERROR_BACKGROUND: '#290000', LOG_ERROR_BORDER: '#5b0000', LOG_ERROR_COLOR: '#ff8080', LOG_DEBUG_ICON: "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 459 459'%3e%3cpath fill='%234D88FF' d='M433.5 127.5h-71.4a177.7 177.7 0 0 0-45.9-51L357 35.7 321.3 0l-56.1 56.1c-10.2-2.6-23-5.1-35.7-5.1s-25.5 2.5-35.7 5.1L137.7 0 102 35.7l40.8 40.8a177.7 177.7 0 0 0-45.9 51H25.5v51H79c-2.5 7.7-2.5 17.9-2.5 25.5v25.5h-51v51h51V306a88 88 0 0 0 2.5 25.5H25.5v51h71.4A152.2 152.2 0 0 0 229.5 459c56.1 0 107.1-30.6 132.6-76.5h71.4v-51H380c2.5-7.7 2.5-17.9 2.5-25.5v-25.5h51v-51h-51V204c0-7.7 0-17.9-2.5-25.5h53.5v-51zm-153 204h-102v-51h102v51zm0-102h-102v-51h102v51z'/%3e%3c/svg%3e\")", LOG_DEBUG_BACKGROUND: '', LOG_DEBUG_BORDER: '', LOG_DEBUG_COLOR: '#4D88FF', LOG_COMMAND_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVChTY6AtmDx5cvnUqVP1oFzsoL+/XwCo8DEQv584caIVVBg7mDBhghxQ4Y2+vr6vU6ZM8YAKYwdA00SB+CxQ8S+g4jCoMCYgSiFRVpPkGaAiHMHDwAAA5Ko+F4/l6+MAAAAASUVORK5CYII=)", LOG_RESULT_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVChTY6A92LNnj96uXbvKoVzsYMeOHVbbt29/D1T4eP/+/QJQYVSwe/duD6CCr0B8A8iWgwqjAqBk2NatW38B6bPbtm0TBYkBFbsA+c9ANFgRCBCtEASAAoSthgGiPAMD2IOHgQEA521bM7uG52wAAAAASUVORK5CYII=)", LOG_INFO_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADISURBVChTY4ABp/AztmZBZ07qe538rO114rOa8+GTskYHbKHSEOARd6nLIOTsf61gIA46U6kVePYQiK3uc/K/hPG+LrCi8IyrtkZh5yCKgk/80w46ba0RdGYGhH/2v6rXyf88qtttGVwSLp2ECQLxeiAu1wo6uwpJ7L+o2f6TDA6xZz8jCyqFnuHXCj4djywmZXHoM/EK0azGqhBsNYpngL6VCTnGqRF4xgKo+D5IDO4ZEEAKnjcQBafvqwWf/YoSPDCAP8AZGAC7mLM81zgOTQAAAABJRU5ErkJggg==)", 
+        LOG_WARN_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACkSURBVChTbY7BCoJQFERn0Q/3BX1JuxQjsSCXiV8gtCgxhCIrKIRIqKDVzXl5w5cNHBjm6eGinXiAXu5inY2xYm/mbpIh+vcFhLA3sx0athNUhymEsP+10lAEEA17x8o/9wFuNGnYuVlWve0SQl7P0sBu3aq2R1Q/1JzSkYGd29eqNv2wjdnUuvNRciC/N+qe+7gidbA8zyHkOINsvA/sumcOkjcabcBmw2+mMgAAAABJRU5ErkJggg==)", LOG_WARN_BACKGROUND: '#332b00', LOG_WARN_COLOR: '#ffdc9e', LOG_WARN_BORDER: '#650', LOG_WARN_AMOUNT_BACKGROUND: '#ffbb17', LOG_WARN_AMOUNT_COLOR: '#8d8f91', LOG_ERROR_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADESURBVChTY4CB7ZI8tmfU5E6e01b+DMIgNkgMKg0BR9Vkux6YWPx/bemIgkFiIDmwogOaqrYPzazAEm8DwuGKYGyQHEgNw0VT05Mwib9v3v7/kJEHxiA2TDFIDcNNU4vPMFPACj58/P/v40cwGyYOUsNwy8IZRSFIEUgxskKQGoZrzp4ErQapYbgYHG371M4dLACTQGaD5EBqwD6/FpzQ9dTBE64IhkFiIDmwIhi4mlJqey8o4eR9r8jPIAxig8QgsgwMAFZz1YtGPXgjAAAAAElFTkSuQmCC)", LOG_ERROR_BACKGROUND: '#290000', LOG_ERROR_BORDER: '#5b0000', LOG_ERROR_COLOR: '#ff8080', LOG_ERROR_AMOUNT_BACKGROUND: '#dc2727', LOG_ERROR_AMOUNT_COLOR: '#8d8f91', LOG_DEBUG_ICON: "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 459 459'%3e%3cpath fill='%234D88FF' d='M433.5 127.5h-71.4a177.7 177.7 0 0 0-45.9-51L357 35.7 321.3 0l-56.1 56.1c-10.2-2.6-23-5.1-35.7-5.1s-25.5 2.5-35.7 5.1L137.7 0 102 35.7l40.8 40.8a177.7 177.7 0 0 0-45.9 51H25.5v51H79c-2.5 7.7-2.5 17.9-2.5 25.5v25.5h-51v51h51V306a88 88 0 0 0 2.5 25.5H25.5v51h71.4A152.2 152.2 0 0 0 229.5 459c56.1 0 107.1-30.6 132.6-76.5h71.4v-51H380c2.5-7.7 2.5-17.9 2.5-25.5v-25.5h51v-51h-51V204c0-7.7 0-17.9-2.5-25.5h53.5v-51zm-153 204h-102v-51h102v51zm0-102h-102v-51h102v51z'/%3e%3c/svg%3e\")", LOG_DEBUG_BACKGROUND: '', LOG_DEBUG_BORDER: '', LOG_DEBUG_COLOR: '#4D88FF', LOG_COMMAND_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVChTY6AtmDx5cvnUqVP1oFzsoL+/XwCo8DEQv584caIVVBg7mDBhghxQ4Y2+vr6vU6ZM8YAKYwdA00SB+CxQ8S+g4jCoMCYgSiFRVpPkGaAiHMHDwAAA5Ko+F4/l6+MAAAAASUVORK5CYII=)", LOG_RESULT_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVChTY6A92LNnj96uXbvKoVzsYMeOHVbbt29/D1T4eP/+/QJQYVSwe/duD6CCr0B8A8iWgwqjAqBk2NatW38B6bPbtm0TBYkBFbsA+c9ANFgRCBCtEASAAoSthgGiPAMD2IOHgQEA521bM7uG52wAAAAASUVORK5CYII=)", LOG_INFO_ICON: "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADISURBVChTY4ABp/AztmZBZ07qe538rO114rOa8+GTskYHbKHSEOARd6nLIOTsf61gIA46U6kVePYQiK3uc/K/hPG+LrCi8IyrtkZh5yCKgk/80w46ba0RdGYGhH/2v6rXyf88qtttGVwSLp2ECQLxeiAu1wo6uwpJ7L+o2f6TDA6xZz8jCyqFnuHXCj4djywmZXHoM/EK0azGqhBsNYpngL6VCTnGqRF4xgKo+D5IDO4ZEEAKnjcQBafvqwWf/YoSPDCAP8AZGAC7mLM81zgOTQAAAABJRU5ErkJggg==)", 
         /**
          * Fonts
          */
@@ -5093,7 +5088,7 @@ var createStyled = function createStyled(tag, options) {
 
 
     var Styled = withEmotionCache(function (props, context, ref) {
-      return React.createElement(ThemeContext.Consumer, null, function (theme) {
+      return createElement(ThemeContext.Consumer, null, function (theme) {
         var finalTag = shouldUseAs && props.as || baseTag;
         var className = '';
         var classInterpolations = [];
@@ -5142,7 +5137,7 @@ var createStyled = function createStyled(tag, options) {
           console.error('`innerRef` is deprecated and will be removed in a future major version of Emotion, please use the `ref` prop instead' + (identifierName === undefined ? '' : " in the usage of `" + identifierName + "`"));
         }
 
-        var ele = React.createElement(finalTag, newProps);
+        var ele = createElement(finalTag, newProps);
 
         return ele;
       });
@@ -5246,6 +5241,25 @@ exports.Icon = theme$2["default"]('div')(function (_a) {
         backgroundRepeat: 'no-repeat',
         backgroundSize: styles.LOG_ICON_BACKGROUND_SIZE,
         backgroundPosition: '50% 50%'
+    });
+});
+/**
+ * message-amount
+ */
+exports.AmountIcon = theme$2["default"]('div')(function (_a) {
+    var _b = _a.theme, styles = _b.styles, method = _b.method;
+    return ({
+        height: '16px',
+        margin: '1px 0',
+        whiteSpace: 'nowrap',
+        fontSize: '10px',
+        lineHeight: '17px',
+        padding: '0px 3px',
+        background: Themed('amount_background', method, styles),
+        color: Themed('amount_color', method, styles),
+        borderRadius: '8px',
+        minWidth: '18px',
+        textAlign: 'center'
     });
 });
 /**
@@ -7974,12 +7988,12 @@ var Formatted = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Formatted.prototype.render = function () {
-        return (React__default.createElement(elements$1.Root, { "data-type": "formatted", dangerouslySetInnerHTML: {
+        return (React.createElement(elements$1.Root, { "data-type": "formatted", dangerouslySetInnerHTML: {
                 __html: devtoolsParser["default"](this.props.data || [])
             } }));
     };
     return Formatted;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = Formatted;
 
 });
@@ -7990,7 +8004,7 @@ exports.__esModule = true;
 
 
 
-var _react2 = _interopRequireDefault(React__default);
+var _react2 = _interopRequireDefault(React);
 
 
 
@@ -8168,10 +8182,10 @@ exports.__esModule = true;
 
 var CustomObjectLabel = function (_a) {
     var name = _a.name, data = _a.data, _b = _a.isNonenumerable, isNonenumerable = _b === void 0 ? false : _b;
-    return (React__default.createElement("span", null,
-        typeof name === 'string' ? (React__default.createElement(Inspector.ObjectName, { name: name, dimmed: isNonenumerable })) : (React__default.createElement(Inspector.ObjectPreview, { data: name })),
-        React__default.createElement("span", null, ": "),
-        React__default.createElement(Inspector.ObjectValue, { object: data })));
+    return (React.createElement("span", null,
+        typeof name === 'string' ? (React.createElement(Inspector.ObjectName, { name: name, dimmed: isNonenumerable })) : (React.createElement(Inspector.ObjectPreview, { data: name })),
+        React.createElement("span", null, ": "),
+        React.createElement(Inspector.ObjectValue, { object: data })));
 };
 var CustomInspector = /** @class */ (function (_super) {
     __extends(CustomInspector, _super);
@@ -8183,25 +8197,25 @@ var CustomInspector = /** @class */ (function (_super) {
         var styles = theme.styles, method = theme.method;
         var dom = data instanceof HTMLElement;
         var table = method === 'table';
-        return (React__default.createElement(elements$1.Root, { "data-type": table ? 'table' : dom ? 'html' : 'object' }, table ? (React__default.createElement(elements$1.Table, null,
-            React__default.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles, table: true })),
-            React__default.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles })))) : dom ? (React__default.createElement(elements$1.HTML, null,
-            React__default.createElement(Inspector.DOMInspector, __assign({}, this.props, { theme: styles })))) : (React__default.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles, nodeRenderer: this.nodeRenderer.bind(this) })))));
+        return (React.createElement(elements$1.Root, { "data-type": table ? 'table' : dom ? 'html' : 'object' }, table ? (React.createElement(elements$1.Table, null,
+            React.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles, table: true })),
+            React.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles })))) : dom ? (React.createElement(elements$1.HTML, null,
+            React.createElement(Inspector.DOMInspector, __assign({}, this.props, { theme: styles })))) : (React.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles, nodeRenderer: this.nodeRenderer.bind(this) })))));
     };
     CustomInspector.prototype.getCustomNode = function (data) {
         var styles = this.props.theme.styles;
         var constructor = data && data.constructor ? data.constructor.name : null;
         if (constructor === 'Function')
-            return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
-                React__default.createElement(Inspector.ObjectPreview, { data: data }), " {",
-                React__default.createElement("span", { style: { color: 'rgb(181, 181, 181)' } }, data.body), "}"));
+            return (React.createElement("span", { style: { fontStyle: 'italic' } },
+                React.createElement(Inspector.ObjectPreview, { data: data }), " {",
+                React.createElement("span", { style: { color: 'rgb(181, 181, 181)' } }, data.body), "}"));
         if (constructor === 'Promise')
-            return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
+            return (React.createElement("span", { style: { fontStyle: 'italic' } },
                 "Promise ", "{",
-                React__default.createElement("span", { style: { opacity: 0.6 } }, "<pending>"), "}"));
+                React.createElement("span", { style: { opacity: 0.6 } }, "<pending>"), "}"));
         if (data instanceof HTMLElement)
-            return (React__default.createElement(elements$1.HTML, null,
-                React__default.createElement(Inspector.DOMInspector, { data: data, theme: styles })));
+            return (React.createElement(elements$1.HTML, null,
+                React.createElement(Inspector.DOMInspector, { data: data, theme: styles })));
         return null;
     };
     CustomInspector.prototype.nodeRenderer = function (props) {
@@ -8209,19 +8223,19 @@ var CustomInspector = /** @class */ (function (_super) {
         // Root
         if (depth === 0) {
             var customNode_1 = this.getCustomNode(data);
-            return customNode_1 || React__default.createElement(Inspector.ObjectRootLabel, { name: name, data: data });
+            return customNode_1 || React.createElement(Inspector.ObjectRootLabel, { name: name, data: data });
         }
         if (name === 'constructor')
-            return (React__default.createElement(elements$1.Constructor, null,
-                React__default.createElement(Inspector.ObjectLabel, { name: "<constructor>", data: data.name, isNonenumerable: isNonenumerable })));
+            return (React.createElement(elements$1.Constructor, null,
+                React.createElement(Inspector.ObjectLabel, { name: "<constructor>", data: data.name, isNonenumerable: isNonenumerable })));
         var customNode = this.getCustomNode(data);
-        return customNode ? (React__default.createElement(elements$1.Root, null,
-            React__default.createElement(Inspector.ObjectName, { name: name }),
-            React__default.createElement("span", null, ": "),
-            customNode)) : (React__default.createElement(CustomObjectLabel, { name: name, data: data, isNonenumerable: isNonenumerable }));
+        return customNode ? (React.createElement(elements$1.Root, null,
+            React.createElement(Inspector.ObjectName, { name: name }),
+            React.createElement("span", null, ": "),
+            customNode)) : (React.createElement(CustomObjectLabel, { name: name, data: data, isNonenumerable: isNonenumerable }));
     };
     return CustomInspector;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = emotionTheming_browser_esm.withTheme(CustomInspector);
 
 });
@@ -8255,20 +8269,20 @@ var ObjectTree = /** @class */ (function (_super) {
         var _a = this.props, theme = _a.theme, quoted = _a.quoted, log = _a.log;
         return log.data.map(function (message, i) {
             if (typeof message === 'string') {
-                var string = !quoted && message.length ? (message + " ") : (React__default.createElement("span", null,
-                    React__default.createElement("span", null, "\""),
-                    React__default.createElement("span", { style: {
+                var string = !quoted && message.length ? (message + " ") : (React.createElement("span", null,
+                    React.createElement("span", null, "\""),
+                    React.createElement("span", { style: {
                             color: theme.styles.OBJECT_VALUE_STRING_COLOR
                         } }, message),
-                    React__default.createElement("span", null, "\" ")));
-                return (React__default.createElement(elements$1.Root, { "data-type": "string", key: i },
-                    React__default.createElement(react, null, string)));
+                    React.createElement("span", null, "\" ")));
+                return (React.createElement(elements$1.Root, { "data-type": "string", key: i },
+                    React.createElement(react, null, string)));
             }
-            return React__default.createElement(reactInspector["default"], { data: message, key: i });
+            return React.createElement(reactInspector["default"], { data: message, key: i });
         });
     };
     return ObjectTree;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = emotionTheming_browser_esm.withTheme(ObjectTree);
 
 });
@@ -8316,14 +8330,14 @@ var ErrorPanel = /** @class */ (function (_super) {
             otherErrorLines = msgArray.slice(1);
         }
         if (!otherErrorLines) {
-            return React__default.createElement(react, null, log.data.join(' '));
+            return React.createElement(react, null, log.data.join(' '));
         }
-        return (React__default.createElement("details", null,
-            React__default.createElement("summary", { style: { outline: 'none', cursor: 'pointer' } }, firstLine),
-            React__default.createElement(react, null, otherErrorLines.join('\n\r'))));
+        return (React.createElement("details", null,
+            React.createElement("summary", { style: { outline: 'none', cursor: 'pointer' } }, firstLine),
+            React.createElement(react, null, otherErrorLines.join('\n\r'))));
     };
     return ErrorPanel;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = ErrorPanel;
 
 });
@@ -8369,10 +8383,10 @@ var ConsoleMessage = /** @class */ (function (_super) {
     }
     ConsoleMessage.prototype.render = function () {
         var log = this.props.log;
-        return (React__default.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
-            React__default.createElement(elements.Message, { "data-method": log.method },
-                React__default.createElement(elements.Icon, null),
-                React__default.createElement(elements.Content, null, this.getNode()))));
+        return (React.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
+            React.createElement(elements.Message, { "data-method": log.method },
+                log.amount > 1 ? React.createElement(elements.AmountIcon, null, log.amount) : React.createElement(elements.Icon, null),
+                React.createElement(elements.Content, null, this.getNode()))));
     };
     ConsoleMessage.prototype.getNode = function () {
         var log = this.props.log;
@@ -8384,20 +8398,20 @@ var ConsoleMessage = /** @class */ (function (_super) {
         if (log.data.length > 0 &&
             typeof log.data[0] === 'string' &&
             log.data[0].indexOf('%') > -1) {
-            return React__default.createElement(Formatted_1["default"], { data: log.data });
+            return React.createElement(Formatted_1["default"], { data: log.data });
         }
         // Error panel
         if (log.data.every(function (message) { return typeof message === 'string'; }) &&
             log.method === 'error') {
-            return React__default.createElement(_Error["default"], { log: log });
+            return React.createElement(_Error["default"], { log: log });
         }
         // Normal inspector
         var quoted = typeof log.data[0] !== 'string';
-        return React__default.createElement(_Object["default"], { log: log, quoted: quoted });
+        return React.createElement(_Object["default"], { log: log, quoted: quoted });
     };
     ConsoleMessage.prototype.typeCheck = function (log) {
         if (!log) {
-            return (React__default.createElement(Formatted_1["default"], { data: [
+            return (React.createElement(Formatted_1["default"], { data: [
                     "%c[console-feed] %cFailed to parse message! %clog was typeof " + typeof log + ", but it should've been a log object",
                     'color: red',
                     'color: orange',
@@ -8405,7 +8419,7 @@ var ConsoleMessage = /** @class */ (function (_super) {
                 ] }));
         }
         else if (!(log.data instanceof Array)) {
-            return (React__default.createElement(Formatted_1["default"], { data: [
+            return (React.createElement(Formatted_1["default"], { data: [
                     '%c[console-feed] %cFailed to parse message! %clog.data was not an array!',
                     'color: red',
                     'color: orange',
@@ -8415,7 +8429,7 @@ var ConsoleMessage = /** @class */ (function (_super) {
         return false;
     };
     return ConsoleMessage;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = ConsoleMessage;
 
 });
@@ -8484,17 +8498,30 @@ var Console = /** @class */ (function (_super) {
             : function (log) { return regex.test(customStringify(log)); };
         // @ts-ignore
         logs = logs.filter(filterFun);
-        return (React__default.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
-            React__default.createElement(elements.Root, null, logs.map(function (log, i) {
+        // @ts-ignore
+        logs = logs.reduce(function (acc, log) {
+            var prevLog = acc[acc.length - 1];
+            if (prevLog &&
+                prevLog.amount &&
+                prevLog.method === log.method &&
+                prevLog.data.every(function (value, i) { return log.data[i] === value; })) {
+                prevLog.amount += 1;
+                return acc;
+            }
+            acc.push(__assign(__assign({}, log), { amount: 1 }));
+            return acc;
+        }, []);
+        return (React.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
+            React.createElement(elements.Root, null, logs.map(function (log, i) {
                 // If the filter is defined and doesn't include the method
                 var filtered = filter.length !== 0 &&
                     log.method &&
                     filter.indexOf(log.method) === -1;
-                return filtered ? null : (React__default.createElement(Message["default"], { log: log, key: log.method + "-" + i }));
+                return filtered ? null : (React.createElement(Message["default"], { log: log, key: log.method + "-" + i }));
             }))));
     };
     return Console;
-}(React__default.PureComponent));
+}(React.PureComponent));
 exports["default"] = Console;
 
 });
@@ -9558,5 +9585,5 @@ exports.Encode = Transform_2.Encode;
 
 });
 
-module.exports = lib;
-//# sourceMappingURL=console-feed.cjs.js.map
+export default lib;
+//# sourceMappingURL=console-feed.esm.js.map
