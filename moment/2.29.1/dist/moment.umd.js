@@ -1,25 +1,15 @@
-'use strict';
-
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, basedir, module) {
-	return module = {
-	  path: basedir,
-	  exports: {},
-	  require: function (path, base) {
-      return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-    }
-	}, fn(module, module.exports), module.exports;
-}
-
-function commonjsRequire () {
-	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-}
-
-var moment = createCommonjsModule(function (module, exports) {
 (function (global, factory) {
-     module.exports = factory() ;
-}(commonjsGlobal, (function () {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Moment = factory());
+}(this, (function () { 'use strict';
+
+    //! moment.js
+    //! version : 2.29.1
+    //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+    //! license : MIT
+    //! momentjs.com
+
     var hookCallback;
 
     function hooks() {
@@ -2092,13 +2082,13 @@ var moment = createCommonjsModule(function (module, exports) {
         // TODO: Find a better way to register and load all the locales in Node
         if (
             locales[name] === undefined &&
-            'object' !== 'undefined' &&
+            typeof module !== 'undefined' &&
             module &&
             module.exports
         ) {
             try {
                 oldLocale = globalLocale._abbr;
-                aliasedRequire = commonjsRequire;
+                aliasedRequire = require;
                 aliasedRequire('./locale/' + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {
@@ -2550,8 +2540,7 @@ var moment = createCommonjsModule(function (module, exports) {
     hooks.createFromInputFallback = deprecate(
         'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
             'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
-            'discouraged and will be removed in an upcoming major release. Please refer to ' +
-            'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+            'discouraged. Please refer to http://momentjs.com/guides/#/warnings/js-date/ for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
@@ -5631,7 +5620,7 @@ var moment = createCommonjsModule(function (module, exports) {
 
     //! moment.js
 
-    hooks.version = '2.29.0';
+    hooks.version = '2.29.1';
 
     setHookCallback(createLocal);
 
@@ -5679,7 +5668,4 @@ var moment = createCommonjsModule(function (module, exports) {
     return hooks;
 
 })));
-});
-
-module.exports = moment;
-//# sourceMappingURL=moment.cjs.js.map
+//# sourceMappingURL=moment.umd.js.map

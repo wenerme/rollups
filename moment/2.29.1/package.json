@@ -1,6 +1,6 @@
 {
   "name": "@rollups/moment",
-  "version": "2.29.0",
+  "version": "2.29.1",
   "description": "Parse, validate, manipulate, and display dates",
   "keywords": [
     "moment",
@@ -47,7 +47,7 @@
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@types/lodash": "^4",
     "lodash": "^4.17.19",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "rollup": "^2.23.0",
     "rollup-plugin-terser": "^6.1.0"
   },
