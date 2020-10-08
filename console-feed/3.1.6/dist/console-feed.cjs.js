@@ -5358,6 +5358,7 @@ exports["default"] = newStyled["default"];
 
 var elements = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.Content = exports.AmountIcon = exports.Icon = exports.Message = exports.Root = void 0;
 
 /**
  * Return themed log-method style
@@ -5456,6 +5457,7 @@ exports.Content = theme$2["default"]('div')(function (_a) {
 
 var elements$1 = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.Constructor = exports.HTML = exports.Table = exports.Root = void 0;
 
 /**
  * Object root
@@ -5467,7 +5469,7 @@ exports.Root = theme$2["default"]('div')({
         content: "' '",
         display: 'inline-block'
     },
-    '& > li': {
+    '& > li, & > ol, & > details': {
         backgroundColor: 'transparent !important',
         display: 'inline-block'
     },
@@ -7832,6 +7834,7 @@ var stringUtils = createCommonjsModule(function (module, exports) {
 // Taken from the source of chrome devtools:
 // https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/platform/utilities.js#L805-L1006
 exports.__esModule = true;
+exports.String = void 0;
 // Copyright 2014 The Chromium Authors. All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -8143,7 +8146,7 @@ var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -8324,12 +8327,46 @@ exports.default = Linkify;
 
 var react = linkifyReact.default;
 
+var _Error = createCommonjsModule(function (module, exports) {
+exports.__esModule = true;
+
+
+function splitMessage(message) {
+    var breakIndex = message.indexOf('\n');
+    // consider that there can be line without a break
+    if (breakIndex === -1) {
+        return message;
+    }
+    return message.substr(0, breakIndex);
+}
+function ErrorPanel(_a) {
+    var error = _a.error;
+    /* This checks for error logTypes and shortens the message in the console by wrapping
+    it a <details /> tag and putting the first line in a <summary /> tag and the other lines
+    follow after that. This creates a nice collapsible error message */
+    var otherErrorLines;
+    var firstLine = splitMessage(error);
+    var msgArray = error.split('\n');
+    if (msgArray.length > 1) {
+        otherErrorLines = msgArray.slice(1);
+    }
+    if (!otherErrorLines) {
+        return React__default.createElement(react, null, error);
+    }
+    return (React__default.createElement("details", null,
+        React__default.createElement("summary", { style: { outline: 'none', cursor: 'pointer' } }, firstLine),
+        React__default.createElement(react, null, otherErrorLines.join('\n\r'))));
+}
+exports["default"] = ErrorPanel;
+
+});
+
 var reactInspector = createCommonjsModule(function (module, exports) {
 var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -8350,6 +8387,7 @@ var __assign = (commonjsGlobal && commonjsGlobal.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
+
 
 
 
@@ -8377,12 +8415,15 @@ var CustomInspector = /** @class */ (function (_super) {
             React__default.createElement(Inspector.DOMInspector, __assign({}, this.props, { theme: styles })))) : (React__default.createElement(Inspector.Inspector, __assign({}, this.props, { theme: styles, nodeRenderer: this.nodeRenderer.bind(this) })))));
     };
     CustomInspector.prototype.getCustomNode = function (data) {
+        var _a;
         var styles = this.props.theme.styles;
-        var constructor = data && data.constructor ? data.constructor.name : null;
+        var constructor = (_a = data === null || data === void 0 ? void 0 : data.constructor) === null || _a === void 0 ? void 0 : _a.name;
         if (constructor === 'Function')
             return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
                 React__default.createElement(Inspector.ObjectPreview, { data: data }), " {",
                 React__default.createElement("span", { style: { color: 'rgb(181, 181, 181)' } }, data.body), "}"));
+        if (data instanceof Error)
+            return React__default.createElement(_Error["default"], { error: data.stack });
         if (constructor === 'Promise')
             return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
                 "Promise ", "{",
@@ -8419,7 +8460,7 @@ var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -8461,67 +8502,12 @@ exports["default"] = emotionTheming_browser_esm.withTheme(ObjectTree);
 
 });
 
-var _Error = createCommonjsModule(function (module, exports) {
-var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
-
-
-function splitMessage(message) {
-    var breakIndex = message.indexOf('\n');
-    // consider that there can be line without a break
-    if (breakIndex === -1) {
-        return message;
-    }
-    return message.substr(0, breakIndex);
-}
-var ErrorPanel = /** @class */ (function (_super) {
-    __extends(ErrorPanel, _super);
-    function ErrorPanel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    ErrorPanel.prototype.render = function () {
-        var log = this.props.log;
-        /* This checks for error logTypes and shortens the message in the console by wrapping
-        it a <details /> tag and putting the first line in a <summary /> tag and the other lines
-        follow after that. This creates a nice collapsible error message */
-        var otherErrorLines;
-        var msgLine = log.data.join(' ');
-        var firstLine = splitMessage(msgLine);
-        var msgArray = msgLine.split('\n');
-        if (msgArray.length > 1) {
-            otherErrorLines = msgArray.slice(1);
-        }
-        if (!otherErrorLines) {
-            return React__default.createElement(react, null, log.data.join(' '));
-        }
-        return (React__default.createElement("details", null,
-            React__default.createElement("summary", { style: { outline: 'none', cursor: 'pointer' } }, firstLine),
-            React__default.createElement(react, null, otherErrorLines.join('\n\r'))));
-    };
-    return ErrorPanel;
-}(React__default.PureComponent));
-exports["default"] = ErrorPanel;
-
-});
-
 var Message = createCommonjsModule(function (module, exports) {
 var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -8577,7 +8563,7 @@ var ConsoleMessage = /** @class */ (function (_super) {
         // Error panel
         if (log.data.every(function (message) { return typeof message === 'string'; }) &&
             log.method === 'error') {
-            return React__default.createElement(_Error["default"], { log: log });
+            return React__default.createElement(_Error["default"], { error: log.data.join(' ') });
         }
         // Normal inspector
         var quoted = typeof log.data[0] !== 'string';
@@ -8589,7 +8575,7 @@ var ConsoleMessage = /** @class */ (function (_super) {
                     "%c[console-feed] %cFailed to parse message! %clog was typeof " + typeof log + ", but it should've been a log object",
                     'color: red',
                     'color: orange',
-                    'color: cyan'
+                    'color: cyan',
                 ] }));
         }
         else if (!(log.data instanceof Array)) {
@@ -8597,7 +8583,7 @@ var ConsoleMessage = /** @class */ (function (_super) {
                     '%c[console-feed] %cFailed to parse message! %clog.data was not an array!',
                     'color: red',
                     'color: orange',
-                    'color: cyan'
+                    'color: cyan',
                 ] }));
         }
         return false;
@@ -8613,7 +8599,7 @@ var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -8666,12 +8652,21 @@ var Console = /** @class */ (function (_super) {
     }
     Console.prototype.render = function () {
         var _a = this.props, _b = _a.filter, filter = _b === void 0 ? [] : _b, _c = _a.logs, logs = _c === void 0 ? [] : _c, searchKeywords = _a.searchKeywords, logFilter = _a.logFilter;
-        var regex = new RegExp(searchKeywords);
-        var filterFun = logFilter
-            ? logFilter
-            : function (log) { return regex.test(customStringify(log)); };
-        // @ts-ignore
-        logs = logs.filter(filterFun);
+        if (searchKeywords) {
+            var regex_1 = new RegExp(searchKeywords);
+            var filterFun = logFilter
+                ? logFilter
+                : function (log) {
+                    try {
+                        return regex_1.test(customStringify(log));
+                    }
+                    catch (e) {
+                        return true;
+                    }
+                };
+            // @ts-ignore
+            logs = logs.filter(filterFun);
+        }
         // @ts-ignore
         logs = logs.reduce(function (acc, log) {
             var prevLog = acc[acc.length - 1];
@@ -8744,6 +8739,7 @@ exports["default"] = guidGenerator;
 
 var state$1 = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.update = exports.state = void 0;
 function update(newState) {
     exports.state = newState;
 }
@@ -8764,6 +8760,7 @@ var __assign = (commonjsGlobal && commonjsGlobal.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
+exports.initialState = void 0;
 exports.initialState = {
     timings: {},
     count: {}
@@ -8810,6 +8807,7 @@ exports["default"] = dispatch;
 
 var actions = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.timeEnd = exports.timeStart = exports.count = void 0;
 function count(name) {
     return {
         type: 'COUNT',
@@ -8836,6 +8834,7 @@ exports.timeEnd = timeEnd;
 
 var timing = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.stop = exports.start = void 0;
 
 
 
@@ -8844,7 +8843,7 @@ function start(label) {
 }
 exports.start = start;
 function stop(label) {
-    var timing = state$1.state.timings[label];
+    var timing = state$1.state === null || state$1.state === void 0 ? void 0 : state$1.state.timings[label];
     if (timing && !timing.end) {
         dispatch_1["default"](actions.timeEnd(label));
         var time = state$1.state.timings[label].time;
@@ -8864,6 +8863,7 @@ exports.stop = stop;
 
 var count = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.increment = void 0;
 
 
 
@@ -8888,6 +8888,7 @@ var __spreadArrays = (commonjsGlobal && commonjsGlobal.__spreadArrays) || functi
     return r;
 };
 exports.__esModule = true;
+exports.test = void 0;
 function test(expression) {
     var messages = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -9216,7 +9217,7 @@ var TYPED_ARRAY_CTORS = [
     'Int32Array',
     'Uint32Array',
     'Float32Array',
-    'Float64Array'
+    'Float64Array',
 ];
 // Saved proto functions
 var arrSlice = Array.prototype.slice;
@@ -9253,25 +9254,34 @@ var EncodingTransformer = /** @class */ (function () {
         if (typeof serializableVal === 'object')
             this._createCircularCandidate(val, parent, key);
         result[TRANSFORMED_TYPE_KEY] = transform.type;
-        result.data = this._handleValue(serializableVal, parent, key);
+        result.data = this._handleValue(function () { return serializableVal; }, parent, key);
         return result;
     };
     EncodingTransformer.prototype._handleArray = function (arr) {
         var result = [];
-        for (var i = 0; i < arr.length; i++)
-            result[i] = this._handleValue(arr[i], result, i);
+        var _loop_1 = function (i) {
+            result[i] = this_1._handleValue(function () { return arr[i]; }, result, i);
+        };
+        var this_1 = this;
+        for (var i = 0; i < arr.length; i++) {
+            _loop_1(i);
+        }
         return result;
     };
     EncodingTransformer.prototype._handlePlainObject = function (obj) {
-        var _a, _b;
+        var _a;
         var result = Object.create(null);
-        for (var key in obj) {
+        var _loop_2 = function (key) {
             if (Reflect.has(obj, key)) {
                 var resultKey = KEY_REQUIRE_ESCAPING_RE.test(key) ? "#" + key : key;
-                result[resultKey] = this._handleValue(obj[key], result, resultKey);
+                result[resultKey] = this_2._handleValue(function () { return obj[key]; }, result, resultKey);
             }
+        };
+        var this_2 = this;
+        for (var key in obj) {
+            _loop_2(key);
         }
-        var name = ((_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.__proto__) === null || _b === void 0 ? void 0 : _b.constructor).name;
+        var name = ((_a = obj === null || obj === void 0 ? void 0 : obj.__proto__) === null || _a === void 0 ? void 0 : _a.constructor).name;
         if (name !== 'Object') {
             result.constructor = { name: name };
         }
@@ -9293,10 +9303,11 @@ var EncodingTransformer = /** @class */ (function () {
         }
         return null;
     };
-    EncodingTransformer.prototype._handleValue = function (val, parent, key) {
-        var type = typeof val;
-        var isObject = type === 'object' && val !== null;
+    EncodingTransformer.prototype._handleValue = function (getVal, parent, key) {
         try {
+            var val = getVal();
+            var type = typeof val;
+            var isObject = type === 'object' && val !== null;
             if (isObject) {
                 var refMark = this._ensureCircularReference(val);
                 if (refMark)
@@ -9312,11 +9323,17 @@ var EncodingTransformer = /** @class */ (function () {
             return val;
         }
         catch (e) {
-            return null;
+            try {
+                return this._handleValue(function () { return (e instanceof Error ? e : new Error(e)); }, parent, key);
+            }
+            catch (_b) {
+                return null;
+            }
         }
     };
     EncodingTransformer.prototype.transform = function () {
-        var references = [this._handleValue(this.references, null, null)];
+        var _this = this;
+        var references = [this._handleValue(function () { return _this.references; }, null, null)];
         for (var _i = 0, _a = this.circularCandidatesDescrs; _i < _a.length; _i++) {
             var descr = _a[_i];
             if (descr.refIdx > 0) {
@@ -9598,7 +9615,7 @@ var builtInTransforms = [
             }
             return val;
         }
-    }
+    },
 ];
 // Replicator
 var Replicator = /** @class */ (function () {
@@ -9648,6 +9665,7 @@ exports["default"] = Replicator;
 
 var Transform = createCommonjsModule(function (module, exports) {
 exports.__esModule = true;
+exports.Decode = exports.Encode = void 0;
 
 
 
@@ -9746,17 +9764,25 @@ exports["default"] = Unhook;
 });
 
 var lib = createCommonjsModule(function (module, exports) {
+var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
 exports.__esModule = true;
+exports.Encode = exports.Decode = exports.Unhook = exports.Hook = exports.Console = void 0;
 
-exports.Console = Component["default"];
+__createBinding(exports, Component, "default", "Console");
 
-exports.Hook = Hook_1["default"];
+__createBinding(exports, Hook_1, "default", "Hook");
 
-exports.Unhook = Unhook_1["default"];
+__createBinding(exports, Unhook_1, "default", "Unhook");
 
-exports.Decode = Transform.Decode;
+__createBinding(exports, Transform, "Decode");
 var Transform_2 = Transform;
-exports.Encode = Transform_2.Encode;
+__createBinding(exports, Transform_2, "Encode");
 
 });
 
