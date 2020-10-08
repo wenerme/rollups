@@ -2956,97 +2956,48 @@ function isNode (val) {
 
 var isDom = isNode;
 
-function _typeof(obj) {
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
+function createCommonjsModule$1(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
-function _defineProperty$1(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
+var _extends_1$1 = createCommonjsModule$1(function (module) {
+  function _extends() {
+    module.exports = _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
         }
       }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-function _objectSpread$1(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
-
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty$1(target, key, source[key]);
-    });
+      return target;
+    };
+    return _extends.apply(this, arguments);
   }
-
-  return target;
-}
+  module.exports = _extends;
+});
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
+var objectWithoutPropertiesLoose = _objectWithoutPropertiesLoose;
 
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
-
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-
+  var target = objectWithoutPropertiesLoose(source, excluded);
   var key, i;
-
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
     for (i = 0; i < sourceSymbolKeys.length; i++) {
       key = sourceSymbolKeys[i];
       if (excluded.indexOf(key) >= 0) continue;
@@ -3054,67 +3005,9 @@ function _objectWithoutProperties(source, excluded) {
       target[key] = source[key];
     }
   }
-
   return target;
 }
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-function _iterableToArrayLimit(arr, i) {
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
+var objectWithoutProperties = _objectWithoutProperties;
 
 var theme = {
   BASE_FONT_FAMILY: 'Menlo, monospace',
@@ -3152,7 +3045,6 @@ var theme = {
   TABLE_TH_BACKGROUND_COLOR: 'rgb(44, 44, 44)',
   TABLE_TH_HOVER_COLOR: 'rgb(48, 48, 48)',
   TABLE_SORT_ICON_COLOR: 'black',
-  //'rgb(48, 57, 66)',
   TABLE_DATA_BACKGROUND_IMAGE: 'linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(51, 139, 255, 0.0980392) 50%, rgba(51, 139, 255, 0.0980392))',
   TABLE_DATA_BACKGROUND_SIZE: '128px 32px'
 };
@@ -3197,12 +3089,609 @@ var theme$1 = {
   TABLE_DATA_BACKGROUND_SIZE: '128px 32px'
 };
 
-
-
 var themes = /*#__PURE__*/Object.freeze({
+__proto__: null,
 chromeDark: theme,
 chromeLight: theme$1
 });
+
+var runtime_1 = createCommonjsModule$1(function (module) {
+  var runtime = function (exports) {
+    var Op = Object.prototype;
+    var hasOwn = Op.hasOwnProperty;
+    var undefined$1;
+    var $Symbol = typeof Symbol === "function" ? Symbol : {};
+    var iteratorSymbol = $Symbol.iterator || "@@iterator";
+    var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+    var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+    function define(obj, key, value) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+      return obj[key];
+    }
+    try {
+      define({}, "");
+    } catch (err) {
+      define = function (obj, key, value) {
+        return obj[key] = value;
+      };
+    }
+    function wrap(innerFn, outerFn, self, tryLocsList) {
+      var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+      var generator = Object.create(protoGenerator.prototype);
+      var context = new Context(tryLocsList || []);
+      generator._invoke = makeInvokeMethod(innerFn, self, context);
+      return generator;
+    }
+    exports.wrap = wrap;
+    function tryCatch(fn, obj, arg) {
+      try {
+        return {
+          type: "normal",
+          arg: fn.call(obj, arg)
+        };
+      } catch (err) {
+        return {
+          type: "throw",
+          arg: err
+        };
+      }
+    }
+    var GenStateSuspendedStart = "suspendedStart";
+    var GenStateSuspendedYield = "suspendedYield";
+    var GenStateExecuting = "executing";
+    var GenStateCompleted = "completed";
+    var ContinueSentinel = {};
+    function Generator() {}
+    function GeneratorFunction() {}
+    function GeneratorFunctionPrototype() {}
+    var IteratorPrototype = {};
+    IteratorPrototype[iteratorSymbol] = function () {
+      return this;
+    };
+    var getProto = Object.getPrototypeOf;
+    var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+    if (NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+      IteratorPrototype = NativeIteratorPrototype;
+    }
+    var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+    GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+    GeneratorFunctionPrototype.constructor = GeneratorFunction;
+    GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction");
+    function defineIteratorMethods(prototype) {
+      ["next", "throw", "return"].forEach(function (method) {
+        define(prototype, method, function (arg) {
+          return this._invoke(method, arg);
+        });
+      });
+    }
+    exports.isGeneratorFunction = function (genFun) {
+      var ctor = typeof genFun === "function" && genFun.constructor;
+      return ctor ? ctor === GeneratorFunction ||
+      (ctor.displayName || ctor.name) === "GeneratorFunction" : false;
+    };
+    exports.mark = function (genFun) {
+      if (Object.setPrototypeOf) {
+        Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+      } else {
+        genFun.__proto__ = GeneratorFunctionPrototype;
+        define(genFun, toStringTagSymbol, "GeneratorFunction");
+      }
+      genFun.prototype = Object.create(Gp);
+      return genFun;
+    };
+    exports.awrap = function (arg) {
+      return {
+        __await: arg
+      };
+    };
+    function AsyncIterator(generator, PromiseImpl) {
+      function invoke(method, arg, resolve, reject) {
+        var record = tryCatch(generator[method], generator, arg);
+        if (record.type === "throw") {
+          reject(record.arg);
+        } else {
+          var result = record.arg;
+          var value = result.value;
+          if (value && typeof value === "object" && hasOwn.call(value, "__await")) {
+            return PromiseImpl.resolve(value.__await).then(function (value) {
+              invoke("next", value, resolve, reject);
+            }, function (err) {
+              invoke("throw", err, resolve, reject);
+            });
+          }
+          return PromiseImpl.resolve(value).then(function (unwrapped) {
+            result.value = unwrapped;
+            resolve(result);
+          }, function (error) {
+            return invoke("throw", error, resolve, reject);
+          });
+        }
+      }
+      var previousPromise;
+      function enqueue(method, arg) {
+        function callInvokeWithMethodAndArg() {
+          return new PromiseImpl(function (resolve, reject) {
+            invoke(method, arg, resolve, reject);
+          });
+        }
+        return previousPromise =
+        previousPromise ? previousPromise.then(callInvokeWithMethodAndArg,
+        callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+      }
+      this._invoke = enqueue;
+    }
+    defineIteratorMethods(AsyncIterator.prototype);
+    AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+      return this;
+    };
+    exports.AsyncIterator = AsyncIterator;
+    exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+      if (PromiseImpl === void 0) PromiseImpl = Promise;
+      var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+      return exports.isGeneratorFunction(outerFn) ? iter
+      : iter.next().then(function (result) {
+        return result.done ? result.value : iter.next();
+      });
+    };
+    function makeInvokeMethod(innerFn, self, context) {
+      var state = GenStateSuspendedStart;
+      return function invoke(method, arg) {
+        if (state === GenStateExecuting) {
+          throw new Error("Generator is already running");
+        }
+        if (state === GenStateCompleted) {
+          if (method === "throw") {
+            throw arg;
+          }
+          return doneResult();
+        }
+        context.method = method;
+        context.arg = arg;
+        while (true) {
+          var delegate = context.delegate;
+          if (delegate) {
+            var delegateResult = maybeInvokeDelegate(delegate, context);
+            if (delegateResult) {
+              if (delegateResult === ContinueSentinel) continue;
+              return delegateResult;
+            }
+          }
+          if (context.method === "next") {
+            context.sent = context._sent = context.arg;
+          } else if (context.method === "throw") {
+            if (state === GenStateSuspendedStart) {
+              state = GenStateCompleted;
+              throw context.arg;
+            }
+            context.dispatchException(context.arg);
+          } else if (context.method === "return") {
+            context.abrupt("return", context.arg);
+          }
+          state = GenStateExecuting;
+          var record = tryCatch(innerFn, self, context);
+          if (record.type === "normal") {
+            state = context.done ? GenStateCompleted : GenStateSuspendedYield;
+            if (record.arg === ContinueSentinel) {
+              continue;
+            }
+            return {
+              value: record.arg,
+              done: context.done
+            };
+          } else if (record.type === "throw") {
+            state = GenStateCompleted;
+            context.method = "throw";
+            context.arg = record.arg;
+          }
+        }
+      };
+    }
+    function maybeInvokeDelegate(delegate, context) {
+      var method = delegate.iterator[context.method];
+      if (method === undefined$1) {
+        context.delegate = null;
+        if (context.method === "throw") {
+          if (delegate.iterator["return"]) {
+            context.method = "return";
+            context.arg = undefined$1;
+            maybeInvokeDelegate(delegate, context);
+            if (context.method === "throw") {
+              return ContinueSentinel;
+            }
+          }
+          context.method = "throw";
+          context.arg = new TypeError("The iterator does not provide a 'throw' method");
+        }
+        return ContinueSentinel;
+      }
+      var record = tryCatch(method, delegate.iterator, context.arg);
+      if (record.type === "throw") {
+        context.method = "throw";
+        context.arg = record.arg;
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+      var info = record.arg;
+      if (!info) {
+        context.method = "throw";
+        context.arg = new TypeError("iterator result is not an object");
+        context.delegate = null;
+        return ContinueSentinel;
+      }
+      if (info.done) {
+        context[delegate.resultName] = info.value;
+        context.next = delegate.nextLoc;
+        if (context.method !== "return") {
+          context.method = "next";
+          context.arg = undefined$1;
+        }
+      } else {
+        return info;
+      }
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+    defineIteratorMethods(Gp);
+    define(Gp, toStringTagSymbol, "Generator");
+    Gp[iteratorSymbol] = function () {
+      return this;
+    };
+    Gp.toString = function () {
+      return "[object Generator]";
+    };
+    function pushTryEntry(locs) {
+      var entry = {
+        tryLoc: locs[0]
+      };
+      if (1 in locs) {
+        entry.catchLoc = locs[1];
+      }
+      if (2 in locs) {
+        entry.finallyLoc = locs[2];
+        entry.afterLoc = locs[3];
+      }
+      this.tryEntries.push(entry);
+    }
+    function resetTryEntry(entry) {
+      var record = entry.completion || {};
+      record.type = "normal";
+      delete record.arg;
+      entry.completion = record;
+    }
+    function Context(tryLocsList) {
+      this.tryEntries = [{
+        tryLoc: "root"
+      }];
+      tryLocsList.forEach(pushTryEntry, this);
+      this.reset(true);
+    }
+    exports.keys = function (object) {
+      var keys = [];
+      for (var key in object) {
+        keys.push(key);
+      }
+      keys.reverse();
+      return function next() {
+        while (keys.length) {
+          var key = keys.pop();
+          if (key in object) {
+            next.value = key;
+            next.done = false;
+            return next;
+          }
+        }
+        next.done = true;
+        return next;
+      };
+    };
+    function values(iterable) {
+      if (iterable) {
+        var iteratorMethod = iterable[iteratorSymbol];
+        if (iteratorMethod) {
+          return iteratorMethod.call(iterable);
+        }
+        if (typeof iterable.next === "function") {
+          return iterable;
+        }
+        if (!isNaN(iterable.length)) {
+          var i = -1,
+              next = function next() {
+            while (++i < iterable.length) {
+              if (hasOwn.call(iterable, i)) {
+                next.value = iterable[i];
+                next.done = false;
+                return next;
+              }
+            }
+            next.value = undefined$1;
+            next.done = true;
+            return next;
+          };
+          return next.next = next;
+        }
+      }
+      return {
+        next: doneResult
+      };
+    }
+    exports.values = values;
+    function doneResult() {
+      return {
+        value: undefined$1,
+        done: true
+      };
+    }
+    Context.prototype = {
+      constructor: Context,
+      reset: function (skipTempReset) {
+        this.prev = 0;
+        this.next = 0;
+        this.sent = this._sent = undefined$1;
+        this.done = false;
+        this.delegate = null;
+        this.method = "next";
+        this.arg = undefined$1;
+        this.tryEntries.forEach(resetTryEntry);
+        if (!skipTempReset) {
+          for (var name in this) {
+            if (name.charAt(0) === "t" && hasOwn.call(this, name) && !isNaN(+name.slice(1))) {
+              this[name] = undefined$1;
+            }
+          }
+        }
+      },
+      stop: function () {
+        this.done = true;
+        var rootEntry = this.tryEntries[0];
+        var rootRecord = rootEntry.completion;
+        if (rootRecord.type === "throw") {
+          throw rootRecord.arg;
+        }
+        return this.rval;
+      },
+      dispatchException: function (exception) {
+        if (this.done) {
+          throw exception;
+        }
+        var context = this;
+        function handle(loc, caught) {
+          record.type = "throw";
+          record.arg = exception;
+          context.next = loc;
+          if (caught) {
+            context.method = "next";
+            context.arg = undefined$1;
+          }
+          return !!caught;
+        }
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          var record = entry.completion;
+          if (entry.tryLoc === "root") {
+            return handle("end");
+          }
+          if (entry.tryLoc <= this.prev) {
+            var hasCatch = hasOwn.call(entry, "catchLoc");
+            var hasFinally = hasOwn.call(entry, "finallyLoc");
+            if (hasCatch && hasFinally) {
+              if (this.prev < entry.catchLoc) {
+                return handle(entry.catchLoc, true);
+              } else if (this.prev < entry.finallyLoc) {
+                return handle(entry.finallyLoc);
+              }
+            } else if (hasCatch) {
+              if (this.prev < entry.catchLoc) {
+                return handle(entry.catchLoc, true);
+              }
+            } else if (hasFinally) {
+              if (this.prev < entry.finallyLoc) {
+                return handle(entry.finallyLoc);
+              }
+            } else {
+              throw new Error("try statement without catch or finally");
+            }
+          }
+        }
+      },
+      abrupt: function (type, arg) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+            var finallyEntry = entry;
+            break;
+          }
+        }
+        if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc) {
+          finallyEntry = null;
+        }
+        var record = finallyEntry ? finallyEntry.completion : {};
+        record.type = type;
+        record.arg = arg;
+        if (finallyEntry) {
+          this.method = "next";
+          this.next = finallyEntry.finallyLoc;
+          return ContinueSentinel;
+        }
+        return this.complete(record);
+      },
+      complete: function (record, afterLoc) {
+        if (record.type === "throw") {
+          throw record.arg;
+        }
+        if (record.type === "break" || record.type === "continue") {
+          this.next = record.arg;
+        } else if (record.type === "return") {
+          this.rval = this.arg = record.arg;
+          this.method = "return";
+          this.next = "end";
+        } else if (record.type === "normal" && afterLoc) {
+          this.next = afterLoc;
+        }
+        return ContinueSentinel;
+      },
+      finish: function (finallyLoc) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.finallyLoc === finallyLoc) {
+            this.complete(entry.completion, entry.afterLoc);
+            resetTryEntry(entry);
+            return ContinueSentinel;
+          }
+        }
+      },
+      "catch": function (tryLoc) {
+        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+          var entry = this.tryEntries[i];
+          if (entry.tryLoc === tryLoc) {
+            var record = entry.completion;
+            if (record.type === "throw") {
+              var thrown = record.arg;
+              resetTryEntry(entry);
+            }
+            return thrown;
+          }
+        }
+        throw new Error("illegal catch attempt");
+      },
+      delegateYield: function (iterable, resultName, nextLoc) {
+        this.delegate = {
+          iterator: values(iterable),
+          resultName: resultName,
+          nextLoc: nextLoc
+        };
+        if (this.method === "next") {
+          this.arg = undefined$1;
+        }
+        return ContinueSentinel;
+      }
+    };
+    return exports;
+  }(
+   module.exports );
+  try {
+    regeneratorRuntime = runtime;
+  } catch (accidentalStrictMode) {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+});
+
+var regenerator = runtime_1;
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+var arrayWithHoles = _arrayWithHoles;
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+var iterableToArrayLimit = _iterableToArrayLimit;
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+var arrayLikeToArray = _arrayLikeToArray;
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+var unsupportedIterableToArray = _unsupportedIterableToArray;
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+var nonIterableRest = _nonIterableRest;
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+var slicedToArray = _slicedToArray;
+
+var _typeof_1 = createCommonjsModule$1(function (module) {
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      module.exports = _typeof = function _typeof(obj) {
+        return typeof obj;
+      };
+    } else {
+      module.exports = _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+    return _typeof(obj);
+  }
+  module.exports = _typeof;
+});
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+var arrayWithoutHoles = _arrayWithoutHoles;
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+var iterableToArray = _iterableToArray;
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+var nonIterableSpread = _nonIterableSpread;
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+var toConsumableArray = _toConsumableArray;
+
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+var defineProperty$2 = _defineProperty$1;
 
 var ExpandedPathsContext = React.createContext([{}, function () {}]);
 
@@ -3216,6 +3705,8 @@ var unselectable = {
   userSelect: 'none'
 };
 
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var base = (function (theme) {
   return {
     DOMNodePreview: {
@@ -3239,7 +3730,6 @@ var base = (function (theme) {
           color: theme.HTML_TAG_COLOR
         },
         offsetLeft: {
-          /* hack: offset placeholder */
           marginLeft: -theme.TREENODE_PADDING_LEFT
         },
         tagName: {
@@ -3327,15 +3817,14 @@ var base = (function (theme) {
         marginRight: theme.ARROW_MARGIN_RIGHT
       }, unselectable),
       treeNodeArrow: {
-        base: _objectSpread$1({
+        base: _objectSpread$1(_objectSpread$1({
           color: theme.ARROW_COLOR,
           display: 'inline-block',
-          // lineHeight: '14px',
           fontSize: theme.ARROW_FONT_SIZE,
           marginRight: theme.ARROW_MARGIN_RIGHT
         }, parseFloat(theme.ARROW_ANIMATION_DURATION) > 0 ? {
           transition: "transform ".concat(theme.ARROW_ANIMATION_DURATION, " ease 0s")
-        } : {}, unselectable),
+        } : {}), unselectable),
         expanded: {
           WebkitTransform: 'rotateZ(90deg)',
           MozTransform: 'rotateZ(90deg)',
@@ -3349,7 +3838,6 @@ var base = (function (theme) {
       },
       treeNodeChildNodesContainer: {
         margin: 0,
-        // reset user-agent style
         paddingLeft: theme.TREENODE_PADDING_LEFT
       }
     },
@@ -3389,9 +3877,7 @@ var base = (function (theme) {
       td: {
         boxSizing: 'border-box',
         border: 'none',
-        // prevent overrides
         height: '16px',
-        // /* 0.5 * table.background-size height */
         verticalAlign: 'top',
         padding: '1px 4px',
         WebkitUserSelect: 'text',
@@ -3418,14 +3904,11 @@ var base = (function (theme) {
         bottom: 0,
         borderTop: '0 none transparent',
         margin: 0,
-        // prevent user agent stylesheet overrides
         backgroundImage: theme.TABLE_DATA_BACKGROUND_IMAGE,
         backgroundSize: theme.TABLE_DATA_BACKGROUND_SIZE,
         tableLayout: 'fixed',
-        // table
         borderSpacing: 0,
         borderCollapse: 'separate',
-        // height: '100%',
         width: '100%',
         fontSize: theme.BASE_FONT_SIZE,
         lineHeight: '120%'
@@ -3434,7 +3917,6 @@ var base = (function (theme) {
     TableInspectorTH: {
       base: {
         position: 'relative',
-        // anchor for sort icon container
         height: 'auto',
         textAlign: 'left',
         backgroundColor: theme.TABLE_TH_BACKGROUND_COLOR,
@@ -3454,7 +3936,6 @@ var base = (function (theme) {
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
-        // prevent user agent stylesheet overrides
         fontSize: theme.BASE_FONT_SIZE,
         lineHeight: '120%'
       }
@@ -3470,7 +3951,6 @@ var base = (function (theme) {
     TableInspectorSortIcon: _objectSpread$1({
       display: 'block',
       marginRight: 3,
-      // 4,
       width: 8,
       height: 7,
       marginTop: -7,
@@ -3482,36 +3962,21 @@ var base = (function (theme) {
 
 var DEFAULT_THEME_NAME = 'chromeLight';
 var ThemeContext$1 = React.createContext(base(themes[DEFAULT_THEME_NAME]));
-/**
- * Hook to get the component styles for the current theme.
- * @param {string} baseStylesKey - Name of the component to be styled
- */
-
 var useStyles = function useStyles(baseStylesKey) {
   var themeStyles = React.useContext(ThemeContext$1);
   return themeStyles[baseStylesKey];
 };
-/**
- * HOC to create a component that accepts a "theme" prop and uses it to set
- * the current theme. This is intended to be used by the top-level inspector
- * components.
- * @param {Object} WrappedComponent - React component to be wrapped
- */
-
 var themeAcceptor = function themeAcceptor(WrappedComponent) {
   var ThemeAcceptor = function ThemeAcceptor(_ref) {
     var _ref$theme = _ref.theme,
         theme = _ref$theme === void 0 ? DEFAULT_THEME_NAME : _ref$theme,
-        restProps = _objectWithoutProperties(_ref, ["theme"]);
-
+        restProps = objectWithoutProperties(_ref, ["theme"]);
     var themeStyles = React.useMemo(function () {
       switch (Object.prototype.toString.call(theme)) {
         case '[object String]':
           return base(themes[theme]);
-
         case '[object Object]':
           return base(theme);
-
         default:
           return base(themes[DEFAULT_THEME_NAME]);
       }
@@ -3520,23 +3985,23 @@ var themeAcceptor = function themeAcceptor(WrappedComponent) {
       value: themeStyles
     }, React__default.createElement(WrappedComponent, restProps));
   };
-
   ThemeAcceptor.propTypes = {
     theme: propTypes.oneOfType([propTypes.string, propTypes.object])
   };
   return ThemeAcceptor;
 };
 
+function ownKeys$1$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$1$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1$1(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Arrow = function Arrow(_ref) {
   var expanded = _ref.expanded,
       styles = _ref.styles;
   return React__default.createElement("span", {
-    style: _objectSpread$1({}, styles.base, expanded ? styles.expanded : styles.collapsed)
+    style: _objectSpread$1$1(_objectSpread$1$1({}, styles.base), expanded ? styles.expanded : styles.collapsed)
   }, "\u25B6");
 };
-
 var TreeNode = React.memo(function (props) {
-  props = _objectSpread$1({
+  props = _objectSpread$1$1({
     expanded: true,
     nodeRenderer: function nodeRenderer(_ref2) {
       var name = _ref2.name;
@@ -3584,13 +4049,17 @@ TreeNode.propTypes = {
   onClick: propTypes.func
 };
 
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$1(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray$1(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$1(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen); }
+function _arrayLikeToArray$1(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var DEFAULT_ROOT_PATH = '$';
 var WILDCARD = '*';
 function hasChildNodes(data, dataIterator) {
   return !dataIterator(data).next().done;
 }
 var wildcardPathsFromLevel = function wildcardPathsFromLevel(level) {
-  // i is depth
   return Array.from({
     length: level
   }, function (_, i) {
@@ -3604,107 +4073,88 @@ var wildcardPathsFromLevel = function wildcardPathsFromLevel(level) {
 var getExpandedPaths = function getExpandedPaths(data, dataIterator, expandPaths, expandLevel, prevExpandedPaths) {
   var wildcardPaths = [].concat(wildcardPathsFromLevel(expandLevel)).concat(expandPaths).filter(function (path) {
     return typeof path === 'string';
-  }); // could be undefined
-
+  });
   var expandedPaths = [];
   wildcardPaths.forEach(function (wildcardPath) {
     var keyPaths = wildcardPath.split('.');
-
     var populatePaths = function populatePaths(curData, curPath, depth) {
       if (depth === keyPaths.length) {
         expandedPaths.push(curPath);
         return;
       }
-
       var key = keyPaths[depth];
-
       if (depth === 0) {
         if (hasChildNodes(curData, dataIterator) && (key === DEFAULT_ROOT_PATH || key === WILDCARD)) {
           populatePaths(curData, DEFAULT_ROOT_PATH, depth + 1);
         }
       } else {
         if (key === WILDCARD) {
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
-
+          var _iterator = _createForOfIteratorHelper(dataIterator(curData)),
+              _step;
           try {
-            for (var _iterator = dataIterator(curData)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var _ref2 = _step.value;
-              var name = _ref2.name,
-                  _data = _ref2.data;
-
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var _step$value = _step.value,
+                  name = _step$value.name,
+                  _data = _step$value.data;
               if (hasChildNodes(_data, dataIterator)) {
                 populatePaths(_data, "".concat(curPath, ".").concat(name), depth + 1);
               }
             }
           } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _iterator.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-            } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
-              }
-            }
+            _iterator.f();
           }
         } else {
           var value = curData[key];
-
           if (hasChildNodes(value, dataIterator)) {
             populatePaths(value, "".concat(curPath, ".").concat(key), depth + 1);
           }
         }
       }
     };
-
     populatePaths(data, '', 0);
   });
   return expandedPaths.reduce(function (obj, path) {
     obj[path] = true;
     return obj;
-  }, _objectSpread$1({}, prevExpandedPaths));
+  }, _objectSpread$2({}, prevExpandedPaths));
 };
 
+function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ConnectedTreeNode = React.memo(function (props) {
   var data = props.data,
       dataIterator = props.dataIterator,
       path = props.path,
       depth = props.depth,
       nodeRenderer = props.nodeRenderer;
-
   var _useContext = React.useContext(ExpandedPathsContext),
-      _useContext2 = _slicedToArray(_useContext, 2),
+      _useContext2 = slicedToArray(_useContext, 2),
       expandedPaths = _useContext2[0],
       setExpandedPaths = _useContext2[1];
-
   var nodeHasChildNodes = hasChildNodes(data, dataIterator);
   var expanded = !!expandedPaths[path];
   var handleClick = React.useCallback(function () {
     return nodeHasChildNodes && setExpandedPaths(function (prevExpandedPaths) {
-      return _objectSpread$1({}, prevExpandedPaths, _defineProperty$1({}, path, !expanded));
+      return _objectSpread$3(_objectSpread$3({}, prevExpandedPaths), {}, defineProperty$2({}, path, !expanded));
     });
   }, [nodeHasChildNodes, setExpandedPaths, path, expanded]);
-  return React__default.createElement(TreeNode, _extends({
+  return React__default.createElement(TreeNode, _extends_1$1({
     expanded: expanded,
-    onClick: handleClick // show arrow anyway even if not expanded and not rendering children
+    onClick: handleClick
     ,
-    shouldShowArrow: nodeHasChildNodes // show placeholder only for non root nodes
+    shouldShowArrow: nodeHasChildNodes
     ,
-    shouldShowPlaceholder: depth > 0 // Render a node from name and data (or possibly other props like isNonenumerable)
+    shouldShowPlaceholder: depth > 0
     ,
     nodeRenderer: nodeRenderer
-  }, props), // only render if the node is expanded
-  expanded ? _toConsumableArray(dataIterator(data)).map(function (_ref) {
+  }, props),
+  expanded ? toConsumableArray(dataIterator(data)).map(function (_ref) {
     var name = _ref.name,
         data = _ref.data,
-        renderNodeProps = _objectWithoutProperties(_ref, ["name", "data"]);
-
-    return React__default.createElement(ConnectedTreeNode, _extends({
+        renderNodeProps = objectWithoutProperties(_ref, ["name", "data"]);
+    return React__default.createElement(ConnectedTreeNode, _extends_1$1({
       name: name,
       data: data,
       depth: depth + 1,
@@ -3732,10 +4182,8 @@ var TreeView = React.memo(function (_ref2) {
       expandLevel = _ref2.expandLevel;
   var styles = useStyles('TreeView');
   var stateAndSetter = React.useState({});
-
-  var _stateAndSetter = _slicedToArray(stateAndSetter, 2),
+  var _stateAndSetter = slicedToArray(stateAndSetter, 2),
       setExpandedPaths = _stateAndSetter[1];
-
   React.useLayoutEffect(function () {
     return setExpandedPaths(function (prevExpandedPaths) {
       return getExpandedPaths(data, dataIterator, expandPaths, expandLevel, prevExpandedPaths);
@@ -3764,16 +4212,8 @@ TreeView.propTypes = {
   expandLevel: propTypes.number
 };
 
-/**
- * A view for object property names.
- *
- * If the property name is enumerable (in Object.keys(object)),
- * the property name will be rendered normally.
- *
- * If the property name is not enumerable (`Object.prototype.propertyIsEnumerable()`),
- * the property name will be dimmed to show the difference.
- */
-
+function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ObjectName = function ObjectName(_ref) {
   var name = _ref.name,
       _ref$dimmed = _ref.dimmed,
@@ -3781,141 +4221,120 @@ var ObjectName = function ObjectName(_ref) {
       _ref$styles = _ref.styles,
       styles = _ref$styles === void 0 ? {} : _ref$styles;
   var themeStyles = useStyles('ObjectName');
-
-  var appliedStyles = _objectSpread$1({}, themeStyles.base, dimmed ? themeStyles['dimmed'] : {}, styles);
-
+  var appliedStyles = _objectSpread$4(_objectSpread$4(_objectSpread$4({}, themeStyles.base), dimmed ? themeStyles['dimmed'] : {}), styles);
   return React__default.createElement("span", {
     style: appliedStyles
   }, name);
 };
-
 ObjectName.propTypes = {
-  /** Property name */
   name: propTypes.string,
-
-  /** Should property name be dimmed */
   dimmed: propTypes.bool
 };
 
-/**
- * A short description of the object values.
- * Can be used to render tree node in ObjectInspector
- * or render objects in TableInspector.
- */
-
+function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ObjectValue = function ObjectValue(_ref) {
   var object = _ref.object,
       styles = _ref.styles;
   var themeStyles = useStyles('ObjectValue');
-
   var mkStyle = function mkStyle(key) {
-    return _objectSpread$1({}, themeStyles[key], styles);
+    return _objectSpread$5(_objectSpread$5({}, themeStyles[key]), styles);
   };
-
-  switch (_typeof(object)) {
+  switch (_typeof_1(object)) {
+    case 'bigint':
+      return React__default.createElement("span", {
+        style: mkStyle('objectValueNumber')
+      }, String(object), "n");
     case 'number':
       return React__default.createElement("span", {
         style: mkStyle('objectValueNumber')
       }, String(object));
-
     case 'string':
       return React__default.createElement("span", {
         style: mkStyle('objectValueString')
       }, "\"", object, "\"");
-
     case 'boolean':
       return React__default.createElement("span", {
         style: mkStyle('objectValueBoolean')
       }, String(object));
-
     case 'undefined':
       return React__default.createElement("span", {
         style: mkStyle('objectValueUndefined')
       }, "undefined");
-
     case 'object':
       if (object === null) {
         return React__default.createElement("span", {
           style: mkStyle('objectValueNull')
         }, "null");
       }
-
       if (object instanceof Date) {
         return React__default.createElement("span", null, object.toString());
       }
-
       if (object instanceof RegExp) {
         return React__default.createElement("span", {
           style: mkStyle('objectValueRegExp')
         }, object.toString());
       }
-
       if (Array.isArray(object)) {
         return React__default.createElement("span", null, "Array(".concat(object.length, ")"));
       }
-
       if (!object.constructor) {
         return React__default.createElement("span", null, "Object");
       }
-
       if (typeof object.constructor.isBuffer === 'function' && object.constructor.isBuffer(object)) {
         return React__default.createElement("span", null, "Buffer[".concat(object.length, "]"));
       }
-
       return React__default.createElement("span", null, object.constructor.name);
-
     case 'function':
       return React__default.createElement("span", null, React__default.createElement("span", {
         style: mkStyle('objectValueFunctionPrefix')
       }, "\u0192\xA0"), React__default.createElement("span", {
         style: mkStyle('objectValueFunctionName')
       }, object.name, "()"));
-
     case 'symbol':
       return React__default.createElement("span", {
         style: mkStyle('objectValueSymbol')
       }, object.toString());
-
     default:
       return React__default.createElement("span", null);
   }
 };
-
 ObjectValue.propTypes = {
-  // the object to describe
   object: propTypes.any
 };
 
 var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
 var propertyIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-/* intersperse arr with separator */
+function getPropertyValue(object, propertyName) {
+  var propertyDescriptor = Object.getOwnPropertyDescriptor(object, propertyName);
+  if (propertyDescriptor.get) {
+    try {
+      return propertyDescriptor.get();
+    } catch (_unused) {
+      return propertyDescriptor.get;
+    }
+  }
+  return object[propertyName];
+}
 
 function intersperse(arr, sep) {
   if (arr.length === 0) {
     return [];
   }
-
   return arr.slice(1).reduce(function (xs, x) {
     return xs.concat([sep, x]);
   }, [arr[0]]);
 }
-/**
- * A preview of the object
- */
-
-
 var ObjectPreview = function ObjectPreview(_ref) {
   var data = _ref.data;
   var styles = useStyles('ObjectPreview');
   var object = data;
-
-  if (_typeof(object) !== 'object' || object === null || object instanceof Date || object instanceof RegExp) {
+  if (_typeof_1(object) !== 'object' || object === null || object instanceof Date || object instanceof RegExp) {
     return React__default.createElement(ObjectValue, {
       object: object
     });
   }
-
   if (Array.isArray(object)) {
     var maxProperties = styles.arrayMaxProperties;
     var previewArray = object.slice(0, maxProperties).map(function (element, index) {
@@ -3924,13 +4343,11 @@ var ObjectPreview = function ObjectPreview(_ref) {
         object: element
       });
     });
-
     if (object.length > maxProperties) {
-      previewArray.push(React__default.createElement("span", {
+      previewArray.push( React__default.createElement("span", {
         key: "ellipsis"
       }, "\u2026"));
     }
-
     var arrayLength = object.length;
     return React__default.createElement(React__default.Fragment, null, React__default.createElement("span", {
       style: styles.objectDescription
@@ -3940,20 +4357,16 @@ var ObjectPreview = function ObjectPreview(_ref) {
   } else {
     var _maxProperties = styles.objectMaxProperties;
     var propertyNodes = [];
-
     for (var propertyName in object) {
-      var propertyValue = object[propertyName];
-
       if (hasOwnProperty$2.call(object, propertyName)) {
         var ellipsis = void 0;
-
         if (propertyNodes.length === _maxProperties - 1 && Object.keys(object).length > _maxProperties) {
           ellipsis = React__default.createElement("span", {
             key: 'ellipsis'
           }, "\u2026");
         }
-
-        propertyNodes.push(React__default.createElement("span", {
+        var propertyValue = getPropertyValue(object, propertyName);
+        propertyNodes.push( React__default.createElement("span", {
           key: propertyName
         }, React__default.createElement(ObjectName, {
           name: propertyName || "\"\""
@@ -3963,7 +4376,6 @@ var ObjectPreview = function ObjectPreview(_ref) {
         if (ellipsis) break;
       }
     }
-
     var objectConstructorName = object.constructor ? object.constructor.name : 'Object';
     return React__default.createElement(React__default.Fragment, null, React__default.createElement("span", {
       style: styles.objectDescription
@@ -3976,7 +4388,6 @@ var ObjectPreview = function ObjectPreview(_ref) {
 var ObjectRootLabel = function ObjectRootLabel(_ref) {
   var name = _ref.name,
       data = _ref.data;
-
   if (typeof name === 'string') {
     return React__default.createElement("span", null, React__default.createElement(ObjectName, {
       name: name
@@ -3990,272 +4401,179 @@ var ObjectRootLabel = function ObjectRootLabel(_ref) {
   }
 };
 
-/**
- * if isNonenumerable is specified, render the name dimmed
- */
-
 var ObjectLabel = function ObjectLabel(_ref) {
   var name = _ref.name,
       data = _ref.data,
       _ref$isNonenumerable = _ref.isNonenumerable,
       isNonenumerable = _ref$isNonenumerable === void 0 ? false : _ref$isNonenumerable;
   var object = data;
-  return React__default.createElement("span", null, React__default.createElement(ObjectName, {
+  return React__default.createElement("span", null, typeof name === 'string' ? React__default.createElement(ObjectName, {
     name: name,
     dimmed: isNonenumerable
+  }) : React__default.createElement(ObjectPreview, {
+    data: name
   }), React__default.createElement("span", null, ": "), React__default.createElement(ObjectValue, {
     object: object
   }));
 };
-
 ObjectLabel.propTypes = {
-  /** Non enumerable object property will be dimmed */
   isNonenumerable: propTypes.bool
 };
 
+function _createForOfIteratorHelper$1(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray$2(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray$2(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray$2(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$2(o, minLen); }
+function _arrayLikeToArray$2(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 var createIterator = function createIterator(showNonenumerable, sortObjectKeys) {
-  var objectIterator =
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function objectIterator(data) {
-    var shouldIterate, dataIsArray, i, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, entry, _entry, k, v, keys, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, propertyName, propertyValue, _propertyValue;
-
-    return regeneratorRuntime.wrap(function objectIterator$(_context) {
+  var objectIterator = regenerator.mark(function objectIterator(data) {
+    var shouldIterate, dataIsArray, i, _iterator, _step, entry, _entry, k, v, keys, _iterator2, _step2, propertyName, propertyValue, _propertyValue;
+    return regenerator.wrap(function objectIterator$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            shouldIterate = _typeof(data) === 'object' && data !== null || typeof data === 'function';
-
+            shouldIterate = _typeof_1(data) === 'object' && data !== null || typeof data === 'function';
             if (shouldIterate) {
               _context.next = 3;
               break;
             }
-
             return _context.abrupt("return");
-
           case 3:
-            dataIsArray = Array.isArray(data); // iterable objects (except arrays)
-
+            dataIsArray = Array.isArray(data);
             if (!(!dataIsArray && data[Symbol.iterator])) {
-              _context.next = 41;
+              _context.next = 32;
               break;
             }
-
             i = 0;
-            _iteratorNormalCompletion = true;
-            _didIteratorError = false;
-            _iteratorError = undefined;
-            _context.prev = 9;
-            _iterator = data[Symbol.iterator]();
-
-          case 11:
-            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-              _context.next = 25;
+            _iterator = _createForOfIteratorHelper$1(data);
+            _context.prev = 7;
+            _iterator.s();
+          case 9:
+            if ((_step = _iterator.n()).done) {
+              _context.next = 22;
               break;
             }
-
             entry = _step.value;
-
             if (!(Array.isArray(entry) && entry.length === 2)) {
-              _context.next = 19;
+              _context.next = 17;
               break;
             }
-
-            _entry = _slicedToArray(entry, 2), k = _entry[0], v = _entry[1];
-            _context.next = 17;
+            _entry = slicedToArray(entry, 2), k = _entry[0], v = _entry[1];
+            _context.next = 15;
             return {
               name: k,
               data: v
             };
-
-          case 17:
-            _context.next = 21;
+          case 15:
+            _context.next = 19;
             break;
-
-          case 19:
-            _context.next = 21;
+          case 17:
+            _context.next = 19;
             return {
               name: i.toString(),
               data: entry
             };
-
-          case 21:
+          case 19:
             i++;
-
+          case 20:
+            _context.next = 9;
+            break;
           case 22:
-            _iteratorNormalCompletion = true;
-            _context.next = 11;
+            _context.next = 27;
             break;
-
-          case 25:
-            _context.next = 31;
-            break;
-
+          case 24:
+            _context.prev = 24;
+            _context.t0 = _context["catch"](7);
+            _iterator.e(_context.t0);
           case 27:
             _context.prev = 27;
-            _context.t0 = _context["catch"](9);
-            _didIteratorError = true;
-            _iteratorError = _context.t0;
-
-          case 31:
-            _context.prev = 31;
-            _context.prev = 32;
-
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-
-          case 34:
-            _context.prev = 34;
-
-            if (!_didIteratorError) {
-              _context.next = 37;
-              break;
-            }
-
-            throw _iteratorError;
-
-          case 37:
-            return _context.finish(34);
-
-          case 38:
-            return _context.finish(31);
-
-          case 39:
-            _context.next = 82;
+            _iterator.f();
+            return _context.finish(27);
+          case 30:
+            _context.next = 64;
             break;
-
-          case 41:
+          case 32:
             keys = Object.getOwnPropertyNames(data);
-
             if (sortObjectKeys === true && !dataIsArray) {
-              // Array keys should not be sorted in alphabetical order
               keys.sort();
             } else if (typeof sortObjectKeys === 'function') {
               keys.sort(sortObjectKeys);
             }
-
-            _iteratorNormalCompletion2 = true;
-            _didIteratorError2 = false;
-            _iteratorError2 = undefined;
-            _context.prev = 46;
-            _iterator2 = keys[Symbol.iterator]();
-
-          case 48:
-            if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-              _context.next = 65;
+            _iterator2 = _createForOfIteratorHelper$1(keys);
+            _context.prev = 35;
+            _iterator2.s();
+          case 37:
+            if ((_step2 = _iterator2.n()).done) {
+              _context.next = 53;
               break;
             }
-
             propertyName = _step2.value;
-
             if (!propertyIsEnumerable.call(data, propertyName)) {
-              _context.next = 56;
+              _context.next = 45;
               break;
             }
-
-            propertyValue = data[propertyName];
-            _context.next = 54;
+            propertyValue = getPropertyValue(data, propertyName);
+            _context.next = 43;
             return {
               name: propertyName || "\"\"",
               data: propertyValue
             };
-
-          case 54:
-            _context.next = 62;
+          case 43:
+            _context.next = 51;
             break;
-
-          case 56:
+          case 45:
             if (!showNonenumerable) {
-              _context.next = 62;
+              _context.next = 51;
               break;
             }
-
-            // To work around the error (happens some time when propertyName === 'caller' || propertyName === 'arguments')
-            // 'caller' and 'arguments' are restricted function properties and cannot be accessed in this context
-            // http://stackoverflow.com/questions/31921189/caller-and-arguments-are-restricted-function-properties-and-cannot-be-access
             _propertyValue = void 0;
-
             try {
-              _propertyValue = data[propertyName];
-            } catch (e) {// console.warn(e)
+              _propertyValue = getPropertyValue(data, propertyName);
+            } catch (e) {
             }
-
             if (!(_propertyValue !== undefined)) {
-              _context.next = 62;
+              _context.next = 51;
               break;
             }
-
-            _context.next = 62;
+            _context.next = 51;
             return {
               name: propertyName,
               data: _propertyValue,
               isNonenumerable: true
             };
-
-          case 62:
-            _iteratorNormalCompletion2 = true;
-            _context.next = 48;
+          case 51:
+            _context.next = 37;
             break;
-
-          case 65:
-            _context.next = 71;
+          case 53:
+            _context.next = 58;
             break;
-
-          case 67:
-            _context.prev = 67;
-            _context.t1 = _context["catch"](46);
-            _didIteratorError2 = true;
-            _iteratorError2 = _context.t1;
-
-          case 71:
-            _context.prev = 71;
-            _context.prev = 72;
-
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-              _iterator2.return();
-            }
-
-          case 74:
-            _context.prev = 74;
-
-            if (!_didIteratorError2) {
-              _context.next = 77;
-              break;
-            }
-
-            throw _iteratorError2;
-
-          case 77:
-            return _context.finish(74);
-
-          case 78:
-            return _context.finish(71);
-
-          case 79:
+          case 55:
+            _context.prev = 55;
+            _context.t1 = _context["catch"](35);
+            _iterator2.e(_context.t1);
+          case 58:
+            _context.prev = 58;
+            _iterator2.f();
+            return _context.finish(58);
+          case 61:
             if (!(showNonenumerable && data !== Object.prototype
-            /* already added */
             )) {
-              _context.next = 82;
+              _context.next = 64;
               break;
             }
-
-            _context.next = 82;
+            _context.next = 64;
             return {
               name: '__proto__',
               data: Object.getPrototypeOf(data),
               isNonenumerable: true
             };
-
-          case 82:
+          case 64:
           case "end":
             return _context.stop();
         }
       }
-    }, objectIterator, null, [[9, 27, 31, 39], [32,, 34, 38], [46, 67, 71, 79], [72,, 74, 78]]);
+    }, objectIterator, null, [[7, 24, 27, 30], [35, 55, 58, 61]]);
   });
   return objectIterator;
 };
-
 var defaultNodeRenderer = function defaultNodeRenderer(_ref) {
   var depth = _ref.depth,
       name = _ref.name,
@@ -4270,123 +4588,79 @@ var defaultNodeRenderer = function defaultNodeRenderer(_ref) {
     isNonenumerable: isNonenumerable
   });
 };
-/**
- * Tree-view for objects
- */
-
-
 var ObjectInspector = function ObjectInspector(_ref2) {
   var _ref2$showNonenumerab = _ref2.showNonenumerable,
       showNonenumerable = _ref2$showNonenumerab === void 0 ? false : _ref2$showNonenumerab,
       sortObjectKeys = _ref2.sortObjectKeys,
       nodeRenderer = _ref2.nodeRenderer,
-      treeViewProps = _objectWithoutProperties(_ref2, ["showNonenumerable", "sortObjectKeys", "nodeRenderer"]);
-
+      treeViewProps = objectWithoutProperties(_ref2, ["showNonenumerable", "sortObjectKeys", "nodeRenderer"]);
   var dataIterator = createIterator(showNonenumerable, sortObjectKeys);
   var renderer = nodeRenderer ? nodeRenderer : defaultNodeRenderer;
-  return React__default.createElement(TreeView, _extends({
+  return React__default.createElement(TreeView, _extends_1$1({
     nodeRenderer: renderer,
     dataIterator: dataIterator
   }, treeViewProps));
 };
-
 ObjectInspector.propTypes = {
-  /** An integer specifying to which level the tree should be initially expanded. */
   expandLevel: propTypes.number,
-
-  /** An array containing all the paths that should be expanded when the component is initialized, or a string of just one path */
   expandPaths: propTypes.oneOfType([propTypes.string, propTypes.array]),
   name: propTypes.string,
-
-  /** Not required prop because we also allow undefined value */
   data: propTypes.any,
-
-  /** Show non-enumerable properties */
   showNonenumerable: propTypes.bool,
-
-  /** Sort object keys with optional compare function. */
   sortObjectKeys: propTypes.oneOfType([propTypes.bool, propTypes.func]),
-
-  /** Provide a custom nodeRenderer */
   nodeRenderer: propTypes.func
 };
 var ObjectInspector$1 = themeAcceptor(ObjectInspector);
 
-/*
- * Polyfill for running tests
- * `includes` is an ES2016 feature
- */
 if (!Array.prototype.includes) {
   Array.prototype.includes = function (searchElement
-  /*, fromIndex*/
   ) {
     var O = Object(this);
     var len = parseInt(O.length) || 0;
-
     if (len === 0) {
       return false;
     }
-
     var n = parseInt(arguments[1]) || 0;
     var k;
-
     if (n >= 0) {
       k = n;
     } else {
       k = len + n;
-
       if (k < 0) {
         k = 0;
       }
     }
-
     var currentElement;
-
     while (k < len) {
       currentElement = O[k];
-
       if (searchElement === currentElement || searchElement !== searchElement && currentElement !== currentElement) {
-        // NaN !== NaN
         return true;
       }
-
       k++;
     }
-
     return false;
   };
 }
-
 function getHeaders(data) {
-  if (_typeof(data) === 'object') {
-    var rowHeaders; // is an array
-
+  if (_typeof_1(data) === 'object') {
+    var rowHeaders;
     if (Array.isArray(data)) {
       var nRows = data.length;
-      rowHeaders = _toConsumableArray(Array(nRows).keys());
+      rowHeaders = toConsumableArray(Array(nRows).keys());
     } else if (data !== null) {
-      // is an object
-      // keys are row indexes
       rowHeaders = Object.keys(data);
-    } // Time: O(nRows * nCols)
-
-
+    }
     var colHeaders = rowHeaders.reduce(function (colHeaders, rowHeader) {
       var row = data[rowHeader];
-
-      if (_typeof(row) === 'object' && row !== null) {
-        /* O(nCols) Could optimize `includes` here */
+      if (_typeof_1(row) === 'object' && row !== null) {
         var cols = Object.keys(row);
         cols.reduce(function (xs, x) {
           if (!xs.includes(x)) {
-            /* xs is the colHeaders to be filled by searching the row's indexes */
             xs.push(x);
           }
-
           return xs;
         }, colHeaders);
       }
-
       return colHeaders;
     }, []);
     return {
@@ -4394,10 +4668,11 @@ function getHeaders(data) {
       colHeaders: colHeaders
     };
   }
-
   return undefined;
 }
 
+function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var DataContainer = function DataContainer(_ref) {
   var rows = _ref.rows,
       columns = _ref.columns,
@@ -4413,36 +4688,28 @@ var DataContainer = function DataContainer(_ref) {
       key: row,
       style: styles.tr
     }, React__default.createElement("td", {
-      style: _objectSpread$1({}, styles.td, borderStyles.none)
+      style: _objectSpread$6(_objectSpread$6({}, styles.td), borderStyles.none)
     }, row), columns.map(function (column) {
-      var rowData = rowsData[i]; // rowData could be
-      //  object -> index by key
-      //    array -> index by array index
-      //    null -> pass
-      //  boolean -> pass
-      //  string -> pass (hasOwnProperty returns true for [0..len-1])
-      //  number -> pass
-      //  function -> pass
-      //  symbol
-      //  undefined -> pass
-
-      if (_typeof(rowData) === 'object' && rowData !== null && hasOwnProperty$2.call(rowData, column)) {
+      var rowData = rowsData[i];
+      if (_typeof_1(rowData) === 'object' && rowData !== null && hasOwnProperty$2.call(rowData, column)) {
         return React__default.createElement("td", {
           key: column,
-          style: _objectSpread$1({}, styles.td, borderStyles.solid)
+          style: _objectSpread$6(_objectSpread$6({}, styles.td), borderStyles.solid)
         }, React__default.createElement(ObjectValue, {
           object: rowData[column]
         }));
       } else {
         return React__default.createElement("td", {
           key: column,
-          style: _objectSpread$1({}, styles.td, borderStyles.solid)
+          style: _objectSpread$6(_objectSpread$6({}, styles.td), borderStyles.solid)
         });
       }
     }));
   }))));
 };
 
+function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var SortIconContainer = function SortIconContainer(props) {
   return React__default.createElement("div", {
     style: {
@@ -4455,7 +4722,6 @@ var SortIconContainer = function SortIconContainer(props) {
     }
   }, props.children);
 };
-
 var SortIcon = function SortIcon(_ref) {
   var sortAscending = _ref.sortAscending;
   var styles = useStyles('TableInspectorSortIcon');
@@ -4464,7 +4730,6 @@ var SortIcon = function SortIcon(_ref) {
     style: styles
   }, glyph);
 };
-
 var TH = function TH(_ref2) {
   var _ref2$sortAscending = _ref2.sortAscending,
       sortAscending = _ref2$sortAscending === void 0 ? false : _ref2$sortAscending,
@@ -4475,23 +4740,20 @@ var TH = function TH(_ref2) {
       _ref2$borderStyle = _ref2.borderStyle,
       borderStyle = _ref2$borderStyle === void 0 ? {} : _ref2$borderStyle,
       children = _ref2.children,
-      thProps = _objectWithoutProperties(_ref2, ["sortAscending", "sorted", "onClick", "borderStyle", "children"]);
-
+      thProps = objectWithoutProperties(_ref2, ["sortAscending", "sorted", "onClick", "borderStyle", "children"]);
   var styles = useStyles('TableInspectorTH');
-
   var _useState = React.useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
+      _useState2 = slicedToArray(_useState, 2),
       hovered = _useState2[0],
       setHovered = _useState2[1];
-
   var handleMouseEnter = React.useCallback(function () {
     return setHovered(true);
   }, []);
   var handleMouseLeave = React.useCallback(function () {
     return setHovered(false);
   }, []);
-  return React__default.createElement("th", _extends({}, thProps, {
-    style: _objectSpread$1({}, styles.base, borderStyle, hovered ? styles.base[':hover'] : {}),
+  return React__default.createElement("th", _extends_1$1({}, thProps, {
+    style: _objectSpread$7(_objectSpread$7(_objectSpread$7({}, styles.base), borderStyle), hovered ? styles.base[':hover'] : {}),
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     onClick: onClick
@@ -4539,25 +4801,19 @@ var TableInspector = function TableInspector(_ref) {
   var data = _ref.data,
       columns = _ref.columns;
   var styles = useStyles('TableInspector');
-
   var _useState = React.useState({
-    // has user ever clicked the <th> tag to sort?
     sorted: false,
-    // is index column sorted?
     sortIndexColumn: false,
-    // which column is sorted?
     sortColumn: undefined,
-    // is sorting ascending or descending?
     sortAscending: false
   }),
-      _useState2 = _slicedToArray(_useState, 2),
+      _useState2 = slicedToArray(_useState, 2),
       _useState2$ = _useState2[0],
       sorted = _useState2$.sorted,
       sortIndexColumn = _useState2$.sortIndexColumn,
       sortColumn = _useState2$.sortColumn,
       sortAscending = _useState2$.sortAscending,
       setState = _useState2[1];
-
   var handleIndexTHClick = React.useCallback(function () {
     setState(function (_ref2) {
       var sortIndexColumn = _ref2.sortIndexColumn,
@@ -4566,7 +4822,6 @@ var TableInspector = function TableInspector(_ref) {
         sorted: true,
         sortIndexColumn: true,
         sortColumn: undefined,
-        // when changed to a new column, default to asending
         sortAscending: sortIndexColumn ? !sortAscending : true
       };
     });
@@ -4578,46 +4833,31 @@ var TableInspector = function TableInspector(_ref) {
       return {
         sorted: true,
         sortIndexColumn: false,
-        // update sort column
         sortColumn: col,
-        // when changed to a new column, default to asending
         sortAscending: col === sortColumn ? !sortAscending : true
       };
     });
   }, []);
-
-  if (_typeof(data) !== 'object' || data === null) {
+  if (_typeof_1(data) !== 'object' || data === null) {
     return React__default.createElement("div", null);
   }
-
   var _getHeaders = getHeaders(data),
       rowHeaders = _getHeaders.rowHeaders,
-      colHeaders = _getHeaders.colHeaders; // columns to be displayed are specified
-  // NOTE: there's some space for optimization here
-
-
+      colHeaders = _getHeaders.colHeaders;
   if (columns !== undefined) {
     colHeaders = columns;
   }
-
   var rowsData = rowHeaders.map(function (rowHeader) {
     return data[rowHeader];
   });
   var columnDataWithRowIndexes;
-  /* row indexes are [0..nRows-1] */
-  // TODO: refactor
-
   if (sortColumn !== undefined) {
-    // the column to be sorted (rowsData, column) => [[columnData, rowIndex]]
     columnDataWithRowIndexes = rowsData.map(function (rowData, index) {
-      // normalize rowData
-      if (_typeof(rowData) === 'object' && rowData !== null
-      /*&& rowData.hasOwnProperty(sortColumn)*/
+      if (_typeof_1(rowData) === 'object' && rowData !== null
       ) {
           var columnData = rowData[sortColumn];
           return [columnData, index];
         }
-
       return [undefined, index];
     });
   } else {
@@ -4628,20 +4868,13 @@ var TableInspector = function TableInspector(_ref) {
       });
     }
   }
-
   if (columnDataWithRowIndexes !== undefined) {
-    // apply a mapper before sorting (because we need to access inside a container)
     var comparator = function comparator(mapper, ascending) {
       return function (a, b) {
-        var v1 = mapper(a); // the datum
-
+        var v1 = mapper(a);
         var v2 = mapper(b);
-
-        var type1 = _typeof(v1);
-
-        var type2 = _typeof(v2); // use '<' operator to compare same type of values or compare type precedence order #
-
-
+        var type1 = _typeof_1(v1);
+        var type2 = _typeof_1(v2);
         var lt = function lt(v1, v2) {
           if (v1 < v2) {
             return -1;
@@ -4651,13 +4884,10 @@ var TableInspector = function TableInspector(_ref) {
             return 0;
           }
         };
-
         var result;
-
         if (type1 === type2) {
           result = lt(v1, v2);
         } else {
-          // order of different types
           var order = {
             string: 0,
             number: 1,
@@ -4668,20 +4898,16 @@ var TableInspector = function TableInspector(_ref) {
             function: 6
           };
           result = lt(order[type1], order[type2]);
-        } // reverse result if descending
-
-
+        }
         if (!ascending) result = -result;
         return result;
       };
     };
-
     var sortedRowIndexes = columnDataWithRowIndexes.sort(comparator(function (item) {
       return item[0];
     }, sortAscending)).map(function (item) {
       return item[1];
-    }); // sorted row indexes
-
+    });
     rowHeaders = sortedRowIndexes.map(function (i) {
       return rowHeaders[i];
     });
@@ -4689,12 +4915,10 @@ var TableInspector = function TableInspector(_ref) {
       return rowsData[i];
     });
   }
-
   return React__default.createElement("div", {
     style: styles.base
   }, React__default.createElement(HeaderContainer, {
     columns: colHeaders
-    /* for sorting */
     ,
     sorted: sorted,
     sortIndexColumn: sortIndexColumn,
@@ -4708,22 +4932,13 @@ var TableInspector = function TableInspector(_ref) {
     rowsData: rowsData
   }));
 };
-
 TableInspector.propTypes = {
-  /**
-   * the Javascript object you would like to inspect, either an array or an object
-   */
   data: propTypes.oneOfType([propTypes.array, propTypes.object]),
-
-  /**
-   * An array of the names of the columns you'd like to display in the table
-   */
   columns: propTypes.array
 };
 var TableInspector$1 = themeAcceptor(TableInspector);
 
 var TEXT_NODE_MAX_INLINE_CHARS = 80;
-
 var shouldInline = function shouldInline(data) {
   return data.childNodes.length === 0 || data.childNodes.length === 1 && data.childNodes[0].nodeType === Node.TEXT_NODE && data.textContent.length < TEXT_NODE_MAX_INLINE_CHARS;
 };
@@ -4739,10 +4954,9 @@ var OpenTag = function OpenTag(_ref) {
   }, tagName), function () {
     if (attributes) {
       var attributeNodes = [];
-
       for (var i = 0; i < attributes.length; i++) {
         var attribute = attributes[i];
-        attributeNodes.push(React__default.createElement("span", {
+        attributeNodes.push( React__default.createElement("span", {
           key: i
         }, ' ', React__default.createElement("span", {
           style: styles.htmlAttributeName
@@ -4750,25 +4964,21 @@ var OpenTag = function OpenTag(_ref) {
           style: styles.htmlAttributeValue
         }, attribute.value), '"'));
       }
-
       return attributeNodes;
     }
   }(), '>');
-}; // isChildNode style={{ marginLeft: -12 /* hack: offset placeholder */ }}
-
-
+};
 var CloseTag = function CloseTag(_ref2) {
   var tagName = _ref2.tagName,
       _ref2$isChildNode = _ref2.isChildNode,
       isChildNode = _ref2$isChildNode === void 0 ? false : _ref2$isChildNode,
       styles = _ref2.styles;
   return React__default.createElement("span", {
-    style: _extends({}, styles.base, isChildNode && styles.offsetLeft)
+    style: _extends_1$1({}, styles.base, isChildNode && styles.offsetLeft)
   }, '</', React__default.createElement("span", {
     style: styles.tagName
   }, tagName), '>');
 };
-
 var nameByNodeType = {
   1: 'ELEMENT_NODE',
   3: 'TEXT_NODE',
@@ -4776,16 +4986,13 @@ var nameByNodeType = {
   8: 'COMMENT_NODE',
   9: 'DOCUMENT_NODE',
   10: 'DOCUMENT_TYPE_NODE',
-  // http://stackoverflow.com/questions/6088972/get-doctype-of-an-html-as-string-with-javascript
   11: 'DOCUMENT_FRAGMENT_NODE'
 };
-
 var DOMNodePreview = function DOMNodePreview(_ref3) {
   var isCloseTag = _ref3.isCloseTag,
       data = _ref3.data,
       expanded = _ref3.expanded;
   var styles = useStyles('DOMNodePreview');
-
   if (isCloseTag) {
     return React__default.createElement(CloseTag, {
       styles: styles.htmlCloseTag,
@@ -4793,7 +5000,6 @@ var DOMNodePreview = function DOMNodePreview(_ref3) {
       tagName: data.tagName
     });
   }
-
   switch (data.nodeType) {
     case Node.ELEMENT_NODE:
       return React__default.createElement("span", null, React__default.createElement(OpenTag, {
@@ -4804,56 +5010,38 @@ var DOMNodePreview = function DOMNodePreview(_ref3) {
         tagName: data.tagName,
         styles: styles.htmlCloseTag
       }));
-
     case Node.TEXT_NODE:
       return React__default.createElement("span", null, data.textContent);
-
     case Node.CDATA_SECTION_NODE:
       return React__default.createElement("span", null, '<![CDATA[' + data.textContent + ']]>');
-
     case Node.COMMENT_NODE:
       return React__default.createElement("span", {
         style: styles.htmlComment
       }, '<!--', data.textContent, '-->');
-
     case Node.PROCESSING_INSTRUCTION_NODE:
       return React__default.createElement("span", null, data.nodeName);
-
     case Node.DOCUMENT_TYPE_NODE:
       return React__default.createElement("span", {
         style: styles.htmlDoctype
       }, '<!DOCTYPE ', data.name, data.publicId ? " PUBLIC \"".concat(data.publicId, "\"") : '', !data.publicId && data.systemId ? ' SYSTEM' : '', data.systemId ? " \"".concat(data.systemId, "\"") : '', '>');
-
     case Node.DOCUMENT_NODE:
       return React__default.createElement("span", null, data.nodeName);
-
     case Node.DOCUMENT_FRAGMENT_NODE:
       return React__default.createElement("span", null, data.nodeName);
-
     default:
       return React__default.createElement("span", null, nameByNodeType[data.nodeType]);
   }
 };
-
 DOMNodePreview.propTypes = {
-  /** If true, just render a close tag */
   isCloseTag: propTypes.bool,
-
-  /**  */
   name: propTypes.string,
-
-  /** The DOM Node */
   data: propTypes.object.isRequired,
-
-  /** Whether the DOM node has been expanded. */
   expanded: propTypes.bool.isRequired
 };
 
-var domIterator =
-/*#__PURE__*/
-regeneratorRuntime.mark(function domIterator(data) {
+var domIterator = regenerator.mark(function domIterator(data) {
   var textInlined, i, node;
-  return regeneratorRuntime.wrap(function domIterator$(_context) {
+  return regenerator.wrap(function domIterator$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
@@ -4861,52 +5049,40 @@ regeneratorRuntime.mark(function domIterator(data) {
             _context.next = 17;
             break;
           }
-
           textInlined = shouldInline(data);
-
           if (!textInlined) {
             _context.next = 4;
             break;
           }
-
           return _context.abrupt("return");
-
         case 4:
           i = 0;
-
         case 5:
           if (!(i < data.childNodes.length)) {
             _context.next = 14;
             break;
           }
-
           node = data.childNodes[i];
-
           if (!(node.nodeType === Node.TEXT_NODE && node.textContent.trim().length === 0)) {
             _context.next = 9;
             break;
           }
-
           return _context.abrupt("continue", 11);
-
         case 9:
           _context.next = 11;
           return {
             name: "".concat(node.tagName, "[").concat(i, "]"),
             data: node
           };
-
         case 11:
           i++;
           _context.next = 5;
           break;
-
         case 14:
           if (!data.tagName) {
             _context.next = 17;
             break;
           }
-
           _context.next = 17;
           return {
             name: 'CLOSE_TAG',
@@ -4915,7 +5091,6 @@ regeneratorRuntime.mark(function domIterator(data) {
             },
             isCloseTag: true
           };
-
         case 17:
         case "end":
           return _context.stop();
@@ -4923,16 +5098,13 @@ regeneratorRuntime.mark(function domIterator(data) {
     }
   }, domIterator);
 });
-
 var DOMInspector = function DOMInspector(props) {
-  return React__default.createElement(TreeView, _extends({
+  return React__default.createElement(TreeView, _extends_1$1({
     nodeRenderer: DOMNodePreview,
     dataIterator: domIterator
   }, props));
 };
-
 DOMInspector.propTypes = {
-  // The DOM Node to inspect
   data: propTypes.object.isRequired
 };
 var DOMInspector$1 = themeAcceptor(DOMInspector);
@@ -4941,22 +5113,19 @@ var Inspector = function Inspector(_ref) {
   var _ref$table = _ref.table,
       table = _ref$table === void 0 ? false : _ref$table,
       data = _ref.data,
-      rest = _objectWithoutProperties(_ref, ["table", "data"]);
-
+      rest = objectWithoutProperties(_ref, ["table", "data"]);
   if (table) {
-    return React__default.createElement(TableInspector$1, _extends({
+    return React__default.createElement(TableInspector$1, _extends_1$1({
       data: data
     }, rest));
   }
-
-  if (isDom(data)) return React__default.createElement(DOMInspector$1, _extends({
+  if (isDom(data)) return React__default.createElement(DOMInspector$1, _extends_1$1({
     data: data
   }, rest));
-  return React__default.createElement(ObjectInspector$1, _extends({
+  return React__default.createElement(ObjectInspector$1, _extends_1$1({
     data: data
   }, rest));
 };
-
 Inspector.propTypes = {
   data: propTypes.any,
   name: propTypes.string,
@@ -5029,9 +5198,9 @@ var getDefaultShouldForwardProp = function getDefaultShouldForwardProp(tag) {
   tag.charCodeAt(0) > 96 ? testOmitPropsOnStringTag : testOmitPropsOnComponent;
 };
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ILLEGAL_ESCAPE_SEQUENCE_ERROR$1 = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
 
 var createStyled = function createStyled(tag, options) {
@@ -5165,7 +5334,7 @@ var createStyled = function createStyled(tag, options) {
     });
 
     Styled.withComponent = function (nextTag, nextOptions) {
-      return createStyled(nextTag, nextOptions !== undefined ? _objectSpread$2({}, options || {}, {}, nextOptions) : options).apply(void 0, styles);
+      return createStyled(nextTag, nextOptions !== undefined ? _objectSpread$8({}, options || {}, {}, nextOptions) : options).apply(void 0, styles);
     };
 
     return Styled;
@@ -9094,14 +9263,15 @@ var EncodingTransformer = /** @class */ (function () {
         return result;
     };
     EncodingTransformer.prototype._handlePlainObject = function (obj) {
+        var _a, _b;
         var result = Object.create(null);
         for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
+            if (Reflect.has(obj, key)) {
                 var resultKey = KEY_REQUIRE_ESCAPING_RE.test(key) ? "#" + key : key;
                 result[resultKey] = this._handleValue(obj[key], result, resultKey);
             }
         }
-        var name = obj.__proto__.constructor.name;
+        var name = ((_b = (_a = obj) === null || _a === void 0 ? void 0 : _a.__proto__) === null || _b === void 0 ? void 0 : _b.constructor).name;
         if (name !== 'Object') {
             result.constructor = { name: name };
         }
