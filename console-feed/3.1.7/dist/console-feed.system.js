@@ -9281,7 +9281,7 @@ System.register(['react'], function (exports) {
 			        return result;
 			    };
 			    EncodingTransformer.prototype._handlePlainObject = function (obj) {
-			        var _a;
+			        var _a, _b;
 			        var result = Object.create(null);
 			        var _loop_2 = function (key) {
 			            if (Reflect.has(obj, key)) {
@@ -9293,8 +9293,8 @@ System.register(['react'], function (exports) {
 			        for (var key in obj) {
 			            _loop_2(key);
 			        }
-			        var name = ((_a = obj === null || obj === void 0 ? void 0 : obj.__proto__) === null || _a === void 0 ? void 0 : _a.constructor).name;
-			        if (name !== 'Object') {
+			        var name = (_b = (_a = obj === null || obj === void 0 ? void 0 : obj.__proto__) === null || _a === void 0 ? void 0 : _a.constructor) === null || _b === void 0 ? void 0 : _b.name;
+			        if (name && name !== 'Object') {
 			            result.constructor = { name: name };
 			        }
 			        return result;

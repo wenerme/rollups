@@ -1,6 +1,6 @@
 {
   "name": "@rollups/console-feed",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "description": "A React component that displays console logs from the current page, an iframe or transported across a server",
   "keywords": [
     "devtools",
@@ -53,7 +53,7 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@types/lodash": "^4",
-    "console-feed": "^3.1.6",
+    "console-feed": "^3.1.7",
     "lodash": "^4.17.19",
     "rollup": "^2.23.0",
     "rollup-plugin-terser": "^6.1.0"
