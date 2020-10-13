@@ -8553,6 +8553,9 @@ System.register(['react'], function (exports) {
 			        _this.theme = function (theme) { return (__assign(__assign({}, theme), { method: _this.props.log.method })); };
 			        return _this;
 			    }
+			    ConsoleMessage.prototype.shouldComponentUpdate = function (nextProps) {
+			        return this.props.log.amount !== nextProps.log.amount;
+			    };
 			    ConsoleMessage.prototype.render = function () {
 			        var log = this.props.log;
 			        return (React.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
@@ -8601,7 +8604,7 @@ System.register(['react'], function (exports) {
 			        return false;
 			    };
 			    return ConsoleMessage;
-			}(React.PureComponent));
+			}(React.Component));
 			exports["default"] = ConsoleMessage;
 
 			});
@@ -8663,7 +8666,7 @@ System.register(['react'], function (exports) {
 			        return _this;
 			    }
 			    Console.prototype.render = function () {
-			        var _a = this.props, _b = _a.filter, filter = _b === void 0 ? [] : _b, _c = _a.logs, logs = _c === void 0 ? [] : _c, searchKeywords = _a.searchKeywords, logFilter = _a.logFilter;
+			        var _a = this.props, _b = _a.filter, filter = _b === void 0 ? [] : _b, _c = _a.logs, logs = _c === void 0 ? [] : _c, searchKeywords = _a.searchKeywords, logFilter = _a.logFilter, _d = _a.logGrouping, logGrouping = _d === void 0 ? true : _d;
 			        if (searchKeywords) {
 			            var regex_1 = new RegExp(searchKeywords);
 			            var filterFun = logFilter
@@ -8679,19 +8682,22 @@ System.register(['react'], function (exports) {
 			            // @ts-ignore
 			            logs = logs.filter(filterFun);
 			        }
-			        // @ts-ignore
-			        logs = logs.reduce(function (acc, log) {
-			            var prevLog = acc[acc.length - 1];
-			            if (prevLog &&
-			                prevLog.amount &&
-			                prevLog.method === log.method &&
-			                prevLog.data.every(function (value, i) { return log.data[i] === value; })) {
-			                prevLog.amount += 1;
+			        if (logGrouping) {
+			            // @ts-ignore
+			            logs = logs.reduce(function (acc, log) {
+			                var prevLog = acc[acc.length - 1];
+			                if (prevLog &&
+			                    prevLog.amount &&
+			                    prevLog.method === log.method &&
+			                    prevLog.data.length === log.data.length &&
+			                    prevLog.data.every(function (value, i) { return log.data[i] === value; })) {
+			                    prevLog.amount += 1;
+			                    return acc;
+			                }
+			                acc.push(__assign(__assign({}, log), { amount: 1 }));
 			                return acc;
-			            }
-			            acc.push(__assign(__assign({}, log), { amount: 1 }));
-			            return acc;
-			        }, []);
+			            }, []);
+			        }
 			        return (React.createElement(emotionTheming_browser_esm.ThemeProvider, { theme: this.theme },
 			            React.createElement(elements.Root, null, logs.map(function (log, i) {
 			                // If the filter is defined and doesn't include the method
