@@ -9529,6 +9529,10 @@ System.register(['react'], function (exports) {
 			            return val instanceof Error;
 			        },
 			        toSerializable: function (err) {
+			            var _a, _b;
+			            if (!err.stack) {
+			                (_b = (_a = Error).captureStackTrace) === null || _b === void 0 ? void 0 : _b.call(_a, err);
+			            }
 			            return {
 			                name: err.name,
 			                message: err.message,
