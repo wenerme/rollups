@@ -8423,8 +8423,9 @@
 	            return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
 	                React__default.createElement(Inspector.ObjectPreview, { data: data }), " {",
 	                React__default.createElement("span", { style: { color: 'rgb(181, 181, 181)' } }, data.body), "}"));
-	        if (data instanceof Error)
+	        if (data instanceof Error && typeof data.stack === 'string') {
 	            return React__default.createElement(_Error["default"], { error: data.stack });
+	        }
 	        if (constructor === 'Promise')
 	            return (React__default.createElement("span", { style: { fontStyle: 'italic' } },
 	                "Promise ", "{",

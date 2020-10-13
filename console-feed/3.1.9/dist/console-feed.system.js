@@ -8434,8 +8434,9 @@ System.register(['react'], function (exports) {
 			            return (React.createElement("span", { style: { fontStyle: 'italic' } },
 			                React.createElement(Inspector.ObjectPreview, { data: data }), " {",
 			                React.createElement("span", { style: { color: 'rgb(181, 181, 181)' } }, data.body), "}"));
-			        if (data instanceof Error)
+			        if (data instanceof Error && typeof data.stack === 'string') {
 			            return React.createElement(_Error["default"], { error: data.stack });
+			        }
 			        if (constructor === 'Promise')
 			            return (React.createElement("span", { style: { fontStyle: 'italic' } },
 			                "Promise ", "{",
